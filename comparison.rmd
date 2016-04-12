@@ -6,5 +6,69 @@ output: html_document
 ---
 
 ```{r}
-summary(cars)
+library(RWeka)
+library(ggplot2)
+library(dplyr)
 ```
+
+# 1. Dataset Retrieval
+
+```{r}
+sonar <- read.csv("sonar/sonar.all-data")
+```
+
+# 2. Basic Classification
+
+## C4.5 Classifier
+```{r}
+sonar.c45 <- J48(R ~ ., data = sonar)
+summary(sonar.c45)
+sonar.c45.confusionMatrix <- summary(sonar.c45)$confusionMatrix
+```
+
+Accuracy, Mean Error, precision, recall, f-score
+
+## Cross-validation
+```{r}
+sonar.c45.10fold <- evaluate_Weka_classifier(sonar.c45, numFolds = 10)
+sonar.c45.10fold
+#sonar.c45.10fold.confusionMatrix <- evaluate_Weka_classifier(sonar.c45, numFolds = 10)$confusionMatrix
+```
+
+Accuracy, Mean Error, precision, recall, f-score
+
+# 3. Other Classifiers
+
+## Random Forest
+
+```{r}
+RF <- make_Weka_classifier("weka/classifiers/trees/RandomForest")
+sonar.randomForest <- RF(R ~ ., data = sonar)
+sonar.randomForest.10fold <- evaluate_Weka_classifier(sonar.randomForest, numFolds = 10)
+sonar.randomForest.10fold
+```
+
+## Support Vector Machine
+```{r}
+SVM <- make_Weka_classifier("weka/classifiers/functions/SMO")
+sonar.supportVectorMachine <- SVM(R ~ ., data = sonar)
+sonar.supportVectorMachine.10fold <- evaluate_Weka_classifier(sonar.supportVectorMachine, numFolds = 10)
+sonar.supportVectorMachine.10fold
+```
+
+## Naive Bayes
+
+```{r}
+NB <- make_Weka_classifier("weka/classifiers/bayes/NaiveBayes")
+sonar.naiveBayes <- NB(R ~ ., data = sonar)
+sonar.naiveBayes.10fold <- evaluate_Weka_classifier(sonar.naiveBayes, numFolds = 10)
+sonar.naiveBayes.10fold
+```
+
+## Neural Networks
+
+```{r}
+
+```
+
+## Bagging & Boosting
