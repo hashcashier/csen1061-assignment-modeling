@@ -76,4 +76,19 @@ sonar.neuralNetwork.10fold <- evaluate_Weka_classifier(sonar.neuralNetwork, numF
 sonar.neuralNetwork.10fold
 ```
 
-## Bagging & Boosting
+## Bagging
+
+```{r}
+sonar.bagging <- Bagging(R ~ ., data = sonar, control = Weka_control(W = "weka.classifiers.trees.J48"))
+sonar.bagging.10fold <- evaluate_Weka_classifier(sonar.bagging, numFolds = 10)
+sonar.bagging.10fold
+```
+
+## Boosting
+
+```{r}
+sonar.boosting <- AdaBoostM1(R ~ ., data = sonar)
+sonar.boosting.10fold <- evaluate_Weka_classifier(sonar.boosting, numFols = 10)
+sonar.boosting.10fold
+```
+
