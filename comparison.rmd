@@ -8,6 +8,7 @@ output: html_document
 ```{r}
 library(RWeka)
 library(ggplot2)
+library(partykit)
 library(dplyr)
 ```
 
@@ -24,6 +25,7 @@ sonar <- read.csv("sonar/sonar.all-data")
 sonar.c45 <- J48(R ~ ., data = sonar)
 summary(sonar.c45)
 sonar.c45.confusionMatrix <- summary(sonar.c45)$confusionMatrix
+plot(sonar.c45)
 ```
 
 Accuracy, Mean Error, precision, recall, f-score
@@ -56,7 +58,7 @@ sonar.supportVectorMachine.10fold <- evaluate_Weka_classifier(sonar.supportVecto
 sonar.supportVectorMachine.10fold
 ```
 
-## Naive Bayes
+## Naive Bayes Classifier
 
 ```{r}
 NB <- make_Weka_classifier("weka/classifiers/bayes/NaiveBayes")
@@ -65,10 +67,13 @@ sonar.naiveBayes.10fold <- evaluate_Weka_classifier(sonar.naiveBayes, numFolds =
 sonar.naiveBayes.10fold
 ```
 
-## Neural Networks
+## Neural Network
 
 ```{r}
-
+MLP <- make_Weka_classifier("weka/classifiers/functions/MultilayerPerceptron")
+sonar.neuralNetwork <- MLP(R ~ ., data = sonar)
+sonar.neuralNetwork.10fold <- evaluate_Weka_classifier(sonar.neuralNetwork, numFolds = 10)
+sonar.neuralNetwork.10fold
 ```
 
 ## Bagging & Boosting
