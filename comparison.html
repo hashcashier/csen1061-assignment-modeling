@@ -118,7 +118,9 @@ $(document).ready(function () {
 
 <pre class="r"><code>library(RWeka)
 library(ggplot2)
-library(dplyr)</code></pre>
+library(partykit)</code></pre>
+<pre><code>## Loading required package: grid</code></pre>
+<pre class="r"><code>library(dplyr)</code></pre>
 <pre><code>## 
 ## Attaching package: 'dplyr'</code></pre>
 <pre><code>## The following objects are masked from 'package:stats':
@@ -127,16 +129,19 @@ library(dplyr)</code></pre>
 <pre><code>## The following objects are masked from 'package:base':
 ## 
 ##     intersect, setdiff, setequal, union</code></pre>
-<div id="dataset-retrieval" class="section level1">
-<h1>1. Dataset Retrieval</h1>
-<pre class="r"><code>sonar &lt;- read.csv(&quot;sonar/sonar.all-data&quot;)</code></pre>
+<div id="initialization" class="section level1">
+<h1>1. Initialization</h1>
+<pre class="r"><code>sonar &lt;- read.csv(&quot;sonar/sonar.all-data&quot;)
+
+compareWith10Fold &lt;- function(classifier) {
+  print(summary(classifier))
+  print(evaluate_Weka_classifier(classifier, numFolds = 10))
+}</code></pre>
 </div>
-<div id="basic-classification" class="section level1">
-<h1>2. Basic Classification</h1>
-<div id="c4.5-classifier" class="section level2">
-<h2>C4.5 Classifier</h2>
-<pre class="r"><code>sonar.c45 &lt;- J48(R ~ ., data = sonar)
-summary(sonar.c45)</code></pre>
+<div id="c4.5-classifier" class="section level1">
+<h1>2. C4.5 Classifier</h1>
+<pre class="r"><code>J48(R ~ ., sonar) %&gt;%
+  compareWith10Fold()</code></pre>
 <pre><code>## 
 ## === Summary ===
 ## 
@@ -155,127 +160,298 @@ summary(sonar.c45)</code></pre>
 ## 
 ##    a   b   &lt;-- classified as
 ##  110   1 |   a = M
-##    3  93 |   b = R</code></pre>
-<pre class="r"><code>sonar.c45.confusionMatrix &lt;- summary(sonar.c45)$confusionMatrix</code></pre>
-<p>Accuracy, Mean Error, precision, recall, f-score</p>
-</div>
-<div id="cross-validation" class="section level2">
-<h2>Cross-validation</h2>
-<pre class="r"><code>sonar.c45.10fold &lt;- evaluate_Weka_classifier(sonar.c45, numFolds = 10)
-sonar.c45.10fold</code></pre>
-<pre><code>## === 10 Fold Cross Validation ===
+##    3  93 |   b = R
+## === 10 Fold Cross Validation ===
 ## 
 ## === Summary ===
 ## 
-## Correctly Classified Instances         144               69.5652 %
-## Incorrectly Classified Instances        63               30.4348 %
-## Kappa statistic                          0.3833
-## Mean absolute error                      0.3097
-## Root mean squared error                  0.5414
-## Relative absolute error                 62.2502 %
-## Root relative squared error            108.5548 %
-## Coverage of cases (0.95 level)          73.913  %
-## Mean rel. region size (0.95 level)      56.0386 %
-## Total Number of Instances              207     
-## 
-## === Confusion Matrix ===
-## 
-##   a  b   &lt;-- classified as
-##  85 26 |  a = M
-##  37 59 |  b = R</code></pre>
-<pre class="r"><code>#sonar.c45.10fold.confusionMatrix &lt;- evaluate_Weka_classifier(sonar.c45, numFolds = 10)$confusionMatrix</code></pre>
-<p>Accuracy, Mean Error, precision, recall, f-score</p>
-</div>
-</div>
-<div id="other-classifiers" class="section level1">
-<h1>3. Other Classifiers</h1>
-<div id="random-forest" class="section level2">
-<h2>Random Forest</h2>
-<pre class="r"><code>RF &lt;- make_Weka_classifier(&quot;weka/classifiers/trees/RandomForest&quot;)
-sonar.randomForest &lt;- RF(R ~ ., data = sonar)
-sonar.randomForest.10fold &lt;- evaluate_Weka_classifier(sonar.randomForest, numFolds = 10)
-sonar.randomForest.10fold</code></pre>
-<pre><code>## === 10 Fold Cross Validation ===
-## 
-## === Summary ===
-## 
-## Correctly Classified Instances         177               85.5072 %
-## Incorrectly Classified Instances        30               14.4928 %
-## Kappa statistic                          0.7061
-## Mean absolute error                      0.3057
-## Root mean squared error                  0.3519
-## Relative absolute error                 61.4424 %
-## Root relative squared error             70.5497 %
-## Coverage of cases (0.95 level)         100      %
-## Mean rel. region size (0.95 level)      96.6184 %
-## Total Number of Instances              207     
-## 
-## === Confusion Matrix ===
-## 
-##    a   b   &lt;-- classified as
-##  102   9 |   a = M
-##   21  75 |   b = R</code></pre>
-</div>
-<div id="support-vector-machine" class="section level2">
-<h2>Support Vector Machine</h2>
-<pre class="r"><code>SVM &lt;- make_Weka_classifier(&quot;weka/classifiers/functions/SMO&quot;)
-sonar.supportVectorMachine &lt;- SVM(R ~ ., data = sonar)
-sonar.supportVectorMachine.10fold &lt;- evaluate_Weka_classifier(sonar.supportVectorMachine, numFolds = 10)
-sonar.supportVectorMachine.10fold</code></pre>
-<pre><code>## === 10 Fold Cross Validation ===
-## 
-## === Summary ===
-## 
-## Correctly Classified Instances         166               80.1932 %
-## Incorrectly Classified Instances        41               19.8068 %
-## Kappa statistic                          0.6021
-## Mean absolute error                      0.1981
-## Root mean squared error                  0.445 
-## Relative absolute error                 39.8157 %
-## Root relative squared error             89.2327 %
-## Coverage of cases (0.95 level)          80.1932 %
-## Mean rel. region size (0.95 level)      50      %
-## Total Number of Instances              207     
-## 
-## === Confusion Matrix ===
-## 
-##   a  b   &lt;-- classified as
-##  90 21 |  a = M
-##  20 76 |  b = R</code></pre>
-</div>
-<div id="naive-bayes" class="section level2">
-<h2>Naive Bayes</h2>
-<pre class="r"><code>NB &lt;- make_Weka_classifier(&quot;weka/classifiers/bayes/NaiveBayes&quot;)
-sonar.naiveBayes &lt;- NB(R ~ ., data = sonar)
-sonar.naiveBayes.10fold &lt;- evaluate_Weka_classifier(sonar.naiveBayes, numFolds = 10)
-sonar.naiveBayes.10fold</code></pre>
-<pre><code>## === 10 Fold Cross Validation ===
-## 
-## === Summary ===
-## 
-## Correctly Classified Instances         146               70.5314 %
-## Incorrectly Classified Instances        61               29.4686 %
-## Kappa statistic                          0.4202
-## Mean absolute error                      0.302 
-## Root mean squared error                  0.5206
-## Relative absolute error                 60.7048 %
-## Root relative squared error            104.3725 %
-## Coverage of cases (0.95 level)          78.2609 %
+## Correctly Classified Instances         155               74.8792 %
+## Incorrectly Classified Instances        52               25.1208 %
+## Kappa statistic                          0.4935
+## Mean absolute error                      0.2666
+## Root mean squared error                  0.4938
+## Relative absolute error                 53.5918 %
+## Root relative squared error             98.9997 %
+## Coverage of cases (0.95 level)          78.744  %
 ## Mean rel. region size (0.95 level)      58.4541 %
 ## Total Number of Instances              207     
 ## 
 ## === Confusion Matrix ===
 ## 
 ##   a  b   &lt;-- classified as
-##  65 46 |  a = M
-##  15 81 |  b = R</code></pre>
+##  87 24 |  a = M
+##  28 68 |  b = R</code></pre>
+<p>Accuracy, Mean Error, precision, recall, f-score</p>
 </div>
-<div id="neural-networks" class="section level2">
-<h2>Neural Networks</h2>
+<div id="other-classifiers" class="section level1">
+<h1>3. Other Classifiers</h1>
+<div id="random-forest" class="section level2">
+<h2>Random Forest</h2>
+<pre class="r"><code>make_Weka_classifier(&quot;weka/classifiers/trees/RandomForest&quot;)(R ~ ., data = sonar) %&gt;%
+  compareWith10Fold()</code></pre>
+<pre><code>## 
+## === Summary ===
+## 
+## Correctly Classified Instances         207              100      %
+## Incorrectly Classified Instances         0                0      %
+## Kappa statistic                          1     
+## Mean absolute error                      0.1144
+## Root mean squared error                  0.1339
+## Relative absolute error                 23.0086 %
+## Root relative squared error             26.854  %
+## Coverage of cases (0.95 level)         100      %
+## Mean rel. region size (0.95 level)      87.9227 %
+## Total Number of Instances              207     
+## 
+## === Confusion Matrix ===
+## 
+##    a   b   &lt;-- classified as
+##  111   0 |   a = M
+##    0  96 |   b = R
+## === 10 Fold Cross Validation ===
+## 
+## === Summary ===
+## 
+## Correctly Classified Instances         169               81.6425 %
+## Incorrectly Classified Instances        38               18.3575 %
+## Kappa statistic                          0.6283
+## Mean absolute error                      0.3072
+## Root mean squared error                  0.3552
+## Relative absolute error                 61.7532 %
+## Root relative squared error             71.2147 %
+## Coverage of cases (0.95 level)         100      %
+## Mean rel. region size (0.95 level)      97.1014 %
+## Total Number of Instances              207     
+## 
+## === Confusion Matrix ===
+## 
+##   a  b   &lt;-- classified as
+##  97 14 |  a = M
+##  24 72 |  b = R</code></pre>
 </div>
-<div id="bagging-boosting" class="section level2">
-<h2>Bagging &amp; Boosting</h2>
+<div id="support-vector-machine" class="section level2">
+<h2>Support Vector Machine</h2>
+<pre class="r"><code>SMO(R ~ ., data = sonar) %&gt;%
+  compareWith10Fold()</code></pre>
+<pre><code>## 
+## === Summary ===
+## 
+## Correctly Classified Instances         182               87.9227 %
+## Incorrectly Classified Instances        25               12.0773 %
+## Kappa statistic                          0.7577
+## Mean absolute error                      0.1208
+## Root mean squared error                  0.3475
+## Relative absolute error                 24.2809 %
+## Root relative squared error             69.688  %
+## Coverage of cases (0.95 level)          87.9227 %
+## Mean rel. region size (0.95 level)      50      %
+## Total Number of Instances              207     
+## 
+## === Confusion Matrix ===
+## 
+##   a  b   &lt;-- classified as
+##  97 14 |  a = M
+##  11 85 |  b = R
+## === 10 Fold Cross Validation ===
+## 
+## === Summary ===
+## 
+## Correctly Classified Instances         162               78.2609 %
+## Incorrectly Classified Instances        45               21.7391 %
+## Kappa statistic                          0.5601
+## Mean absolute error                      0.2174
+## Root mean squared error                  0.4663
+## Relative absolute error                 43.7001 %
+## Root relative squared error             93.4842 %
+## Coverage of cases (0.95 level)          78.2609 %
+## Mean rel. region size (0.95 level)      50      %
+## Total Number of Instances              207     
+## 
+## === Confusion Matrix ===
+## 
+##   a  b   &lt;-- classified as
+##  93 18 |  a = M
+##  27 69 |  b = R</code></pre>
 </div>
+<div id="naive-bayes-classifier" class="section level2">
+<h2>Naive Bayes Classifier</h2>
+<pre class="r"><code>make_Weka_classifier(&quot;weka/classifiers/bayes/NaiveBayes&quot;)(R ~ ., data = sonar) %&gt;%
+  compareWith10Fold()</code></pre>
+<pre><code>## 
+## === Summary ===
+## 
+## Correctly Classified Instances         152               73.43   %
+## Incorrectly Classified Instances        55               26.57   %
+## Kappa statistic                          0.4779
+## Mean absolute error                      0.2822
+## Root mean squared error                  0.5008
+## Relative absolute error                 56.7412 %
+## Root relative squared error            100.43   %
+## Coverage of cases (0.95 level)          78.744  %
+## Mean rel. region size (0.95 level)      57.7295 %
+## Total Number of Instances              207     
+## 
+## === Confusion Matrix ===
+## 
+##   a  b   &lt;-- classified as
+##  67 44 |  a = M
+##  11 85 |  b = R
+## === 10 Fold Cross Validation ===
+## 
+## === Summary ===
+## 
+## Correctly Classified Instances         140               67.6329 %
+## Incorrectly Classified Instances        67               32.3671 %
+## Kappa statistic                          0.3631
+## Mean absolute error                      0.317 
+## Root mean squared error                  0.535 
+## Relative absolute error                 63.7218 %
+## Root relative squared error            107.2687 %
+## Coverage of cases (0.95 level)          77.2947 %
+## Mean rel. region size (0.95 level)      58.4541 %
+## Total Number of Instances              207     
+## 
+## === Confusion Matrix ===
+## 
+##   a  b   &lt;-- classified as
+##  62 49 |  a = M
+##  18 78 |  b = R</code></pre>
+</div>
+<div id="neural-network" class="section level2">
+<h2>Neural Network</h2>
+<pre class="r"><code>make_Weka_classifier(&quot;weka/classifiers/functions/MultilayerPerceptron&quot;)(R ~ ., data = sonar) %&gt;%
+  compareWith10Fold()</code></pre>
+<pre><code>## 
+## === Summary ===
+## 
+## Correctly Classified Instances         206               99.5169 %
+## Incorrectly Classified Instances         1                0.4831 %
+## Kappa statistic                          0.9903
+## Mean absolute error                      0.0098
+## Root mean squared error                  0.07  
+## Relative absolute error                  1.963  %
+## Root relative squared error             14.0426 %
+## Coverage of cases (0.95 level)          99.5169 %
+## Mean rel. region size (0.95 level)      50      %
+## Total Number of Instances              207     
+## 
+## === Confusion Matrix ===
+## 
+##    a   b   &lt;-- classified as
+##  111   0 |   a = M
+##    1  95 |   b = R
+## === 10 Fold Cross Validation ===
+## 
+## === Summary ===
+## 
+## Correctly Classified Instances         173               83.5749 %
+## Incorrectly Classified Instances        34               16.4251 %
+## Kappa statistic                          0.6679
+## Mean absolute error                      0.1741
+## Root mean squared error                  0.3806
+## Relative absolute error                 34.991  %
+## Root relative squared error             76.3038 %
+## Coverage of cases (0.95 level)          91.3043 %
+## Mean rel. region size (0.95 level)      57.971  %
+## Total Number of Instances              207     
+## 
+## === Confusion Matrix ===
+## 
+##   a  b   &lt;-- classified as
+##  98 13 |  a = M
+##  21 75 |  b = R</code></pre>
+</div>
+<div id="bagging" class="section level2">
+<h2>Bagging</h2>
+<pre class="r"><code>Bagging(R ~ ., data = sonar, control = Weka_control(W = &quot;weka.classifiers.trees.J48&quot;)) %&gt;%
+  compareWith10Fold()</code></pre>
+<pre><code>## 
+## === Summary ===
+## 
+## Correctly Classified Instances         204               98.5507 %
+## Incorrectly Classified Instances         3                1.4493 %
+## Kappa statistic                          0.9708
+## Mean absolute error                      0.1417
+## Root mean squared error                  0.1935
+## Relative absolute error                 28.4888 %
+## Root relative squared error             38.8064 %
+## Coverage of cases (0.95 level)         100      %
+## Mean rel. region size (0.95 level)      82.6087 %
+## Total Number of Instances              207     
+## 
+## === Confusion Matrix ===
+## 
+##    a   b   &lt;-- classified as
+##  110   1 |   a = M
+##    2  94 |   b = R
+## === 10 Fold Cross Validation ===
+## 
+## === Summary ===
+## 
+## Correctly Classified Instances         161               77.7778 %
+## Incorrectly Classified Instances        46               22.2222 %
+## Kappa statistic                          0.5468
+## Mean absolute error                      0.2959
+## Root mean squared error                  0.3795
+## Relative absolute error                 59.479  %
+## Root relative squared error             76.0946 %
+## Coverage of cases (0.95 level)         100      %
+## Mean rel. region size (0.95 level)      92.029  %
+## Total Number of Instances              207     
+## 
+## === Confusion Matrix ===
+## 
+##   a  b   &lt;-- classified as
+##  98 13 |  a = M
+##  33 63 |  b = R</code></pre>
+</div>
+<div id="boosting" class="section level2">
+<h2>Boosting</h2>
+<pre class="r"><code>AdaBoostM1(R ~ ., data = sonar) %&gt;%
+  compareWith10Fold()</code></pre>
+<pre><code>## 
+## === Summary ===
+## 
+## Correctly Classified Instances         187               90.3382 %
+## Incorrectly Classified Instances        20                9.6618 %
+## Kappa statistic                          0.8068
+## Mean absolute error                      0.2028
+## Root mean squared error                  0.2954
+## Relative absolute error                 40.7713 %
+## Root relative squared error             59.2304 %
+## Coverage of cases (0.95 level)         100      %
+## Mean rel. region size (0.95 level)      85.7488 %
+## Total Number of Instances              207     
+## 
+## === Confusion Matrix ===
+## 
+##   a  b   &lt;-- classified as
+##  97 14 |  a = M
+##   6 90 |  b = R
+## === 10 Fold Cross Validation ===
+## 
+## === Summary ===
+## 
+## Correctly Classified Instances         156               75.3623 %
+## Incorrectly Classified Instances        51               24.6377 %
+## Kappa statistic                          0.5022
+## Mean absolute error                      0.288 
+## Root mean squared error                  0.4163
+## Relative absolute error                 57.8932 %
+## Root relative squared error             83.4591 %
+## Coverage of cases (0.95 level)          97.1014 %
+## Mean rel. region size (0.95 level)      82.8502 %
+## Total Number of Instances              207     
+## 
+## === Confusion Matrix ===
+## 
+##   a  b   &lt;-- classified as
+##  89 22 |  a = M
+##  29 67 |  b = R</code></pre>
+</div>
+</div>
+<div id="satistically-significant-results" class="section level1">
+<h1>4. Satistically Significant Results</h1>
 </div>
 
 

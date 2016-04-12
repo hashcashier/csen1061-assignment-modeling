@@ -12,29 +12,22 @@ library(partykit)
 library(dplyr)
 ```
 
-# 1. Dataset Retrieval
+# 1. Initialization
 
 ```{r}
 sonar <- read.csv("sonar/sonar.all-data")
+
+compareWith10Fold <- function(classifier) {
+  print(summary(classifier))
+  print(evaluate_Weka_classifier(classifier, numFolds = 10))
+}
 ```
 
-# 2. Basic Classification
+# 2. C4.5 Classifier
 
-## C4.5 Classifier
 ```{r}
-sonar.c45 <- J48(R ~ ., data = sonar)
-summary(sonar.c45)
-sonar.c45.confusionMatrix <- summary(sonar.c45)$confusionMatrix
-plot(sonar.c45)
-```
-
-Accuracy, Mean Error, precision, recall, f-score
-
-## Cross-validation
-```{r}
-sonar.c45.10fold <- evaluate_Weka_classifier(sonar.c45, numFolds = 10)
-sonar.c45.10fold
-#sonar.c45.10fold.confusionMatrix <- evaluate_Weka_classifier(sonar.c45, numFolds = 10)$confusionMatrix
+J48(R ~ ., sonar) %>%
+  compareWith10Fold()
 ```
 
 Accuracy, Mean Error, precision, recall, f-score
@@ -44,51 +37,49 @@ Accuracy, Mean Error, precision, recall, f-score
 ## Random Forest
 
 ```{r}
-RF <- make_Weka_classifier("weka/classifiers/trees/RandomForest")
-sonar.randomForest <- RF(R ~ ., data = sonar)
-sonar.randomForest.10fold <- evaluate_Weka_classifier(sonar.randomForest, numFolds = 10)
-sonar.randomForest.10fold
+make_Weka_classifier("weka/classifiers/trees/RandomForest")(R ~ ., data = sonar) %>%
+  compareWith10Fold()
 ```
 
 ## Support Vector Machine
+
 ```{r}
-SVM <- make_Weka_classifier("weka/classifiers/functions/SMO")
-sonar.supportVectorMachine <- SVM(R ~ ., data = sonar)
-sonar.supportVectorMachine.10fold <- evaluate_Weka_classifier(sonar.supportVectorMachine, numFolds = 10)
-sonar.supportVectorMachine.10fold
+SMO(R ~ ., data = sonar) %>%
+  compareWith10Fold()
 ```
 
 ## Naive Bayes Classifier
 
 ```{r}
-NB <- make_Weka_classifier("weka/classifiers/bayes/NaiveBayes")
-sonar.naiveBayes <- NB(R ~ ., data = sonar)
-sonar.naiveBayes.10fold <- evaluate_Weka_classifier(sonar.naiveBayes, numFolds = 10)
-sonar.naiveBayes.10fold
+make_Weka_classifier("weka/classifiers/bayes/NaiveBayes")(R ~ ., data = sonar) %>%
+  compareWith10Fold()
 ```
 
 ## Neural Network
 
 ```{r}
-MLP <- make_Weka_classifier("weka/classifiers/functions/MultilayerPerceptron")
-sonar.neuralNetwork <- MLP(R ~ ., data = sonar)
-sonar.neuralNetwork.10fold <- evaluate_Weka_classifier(sonar.neuralNetwork, numFolds = 10)
-sonar.neuralNetwork.10fold
+make_Weka_classifier("weka/classifiers/functions/MultilayerPerceptron")(R ~ ., data = sonar) %>%
+  compareWith10Fold()
 ```
 
 ## Bagging
 
 ```{r}
-sonar.bagging <- Bagging(R ~ ., data = sonar, control = Weka_control(W = "weka.classifiers.trees.J48"))
-sonar.bagging.10fold <- evaluate_Weka_classifier(sonar.bagging, numFolds = 10)
-sonar.bagging.10fold
+Bagging(R ~ ., data = sonar, control = Weka_control(W = "weka.classifiers.trees.J48")) %>%
+  compareWith10Fold()
 ```
 
 ## Boosting
 
 ```{r}
-sonar.boosting <- AdaBoostM1(R ~ ., data = sonar)
-sonar.boosting.10fold <- evaluate_Weka_classifier(sonar.boosting, numFols = 10)
-sonar.boosting.10fold
+AdaBoostM1(R ~ ., data = sonar) %>%
+  compareWith10Fold()
 ```
 
+# 4. Satistically Significant Results
+
+## Datasets
+
+```{r}
+#hepatitis <-
+```
