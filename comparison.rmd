@@ -1,13 +1,12 @@
 ---
 title: "Classifier Comparison"
-author: "Rami"
+author: "Rami Khalil"
 date: "April 11, 2016"
 output: html_document
 ---
 
 ```{r}
 library(RWeka)
-library(ggplot2)
 library(partykit)
 library(dplyr)
 ```
@@ -15,19 +14,39 @@ library(dplyr)
 # 1. Initialization
 
 ```{r}
-sonar <- read.csv("sonar/sonar.all-data")
+sonar <- read.csv("sonar/sonar.all-data", header = FALSE) %>% rename(V1 = V61, V61 = V1)
+```
 
+```{r}
 compareWith10Fold <- function(classifier) {
   print(summary(classifier))
-  print(evaluate_Weka_classifier(classifier, numFolds = 10))
+  kfold <- evaluate_Weka_classifier(classifier, numFolds = 10)
+  print(kfold)
+  return(kfold)
+}
+
+calculateMetrics <- function(kfold) {
+  TP <- kfold$confusionMatrix[1, 1]
+  TN <- kfold$confusionMatrix[2, 2]
+  FP <- kfold$confusionMatrix[2, 1]
+  FN <- kfold$confusionMatrix[1, 2]
+  
+  accuracy  <- (TP + TN) / (TP + TN + FP + FN)
+  precision <- TP / (TP + FP)
+  recall    <- TP / (TP + FN)
+  f1        <- 2 * precision * recall / (precision + recall)
+  
+  res <- list(Accuracy = accuracy, Precision = precision, Recall = recall, F1 = f1)
+  return(res)
 }
 ```
 
 # 2. C4.5 Classifier
 
 ```{r}
-J48(R ~ ., sonar) %>%
-  compareWith10Fold()
+J48(V1 ~ ., sonar) %>%
+  compareWith10Fold() %>%
+  calculateMetrics()
 ```
 
 Accuracy, Mean Error, precision, recall, f-score
@@ -37,43 +56,55 @@ Accuracy, Mean Error, precision, recall, f-score
 ## Random Forest
 
 ```{r}
-make_Weka_classifier("weka/classifiers/trees/RandomForest")(R ~ ., data = sonar) %>%
-  compareWith10Fold()
+RF <- make_Weka_classifier("weka/classifiers/trees/RandomForest")
+RF(V1 ~ ., data = sonar) %>%
+  compareWith10Fold() %>%
+  calculateMetrics()
 ```
 
 ## Support Vector Machine
 
 ```{r}
-SMO(R ~ ., data = sonar) %>%
-  compareWith10Fold()
+SMO(V1 ~ ., data = sonar) %>%
+  compareWith10Fold() %>%
+  calculateMetrics()
 ```
 
 ## Naive Bayes Classifier
 
 ```{r}
-make_Weka_classifier("weka/classifiers/bayes/NaiveBayes")(R ~ ., data = sonar) %>%
-  compareWith10Fold()
+NB <- make_Weka_classifier("weka/classifiers/bayes/NaiveBayes")
+NB(V1 ~ ., data = sonar) %>%
+  compareWith10Fold() %>%
+  calculateMetrics()
 ```
 
 ## Neural Network
 
 ```{r}
-make_Weka_classifier("weka/classifiers/functions/MultilayerPerceptron")(R ~ ., data = sonar) %>%
-  compareWith10Fold()
+MLP <- make_Weka_classifier("weka/classifiers/functions/MultilayerPerceptron")
+MLP(V1 ~ ., data = sonar) %>%
+  compareWith10Fold() %>%
+  calculateMetrics()
 ```
 
 ## Bagging
 
 ```{r}
-Bagging(R ~ ., data = sonar, control = Weka_control(W = "weka.classifiers.trees.J48")) %>%
-  compareWith10Fold()
+C45Bagging <- function(form, data, options = list(model = TRUE)) {
+  return(Bagging(formula(form), data, control = Weka_control(W = "weka.classifiers.trees.J48"), options = options))
+}
+C45Bagging(V1 ~ ., data = sonar) %>%
+  compareWith10Fold() %>%
+  calculateMetrics()
 ```
 
 ## Boosting
 
 ```{r}
-AdaBoostM1(R ~ ., data = sonar) %>%
-  compareWith10Fold()
+AdaBoostM1(V1 ~ ., data = sonar) %>%
+  compareWith10Fold() %>%
+  calculateMetrics()
 ```
 
 # 4. Satistically Significant Results
@@ -81,5 +112,59 @@ AdaBoostM1(R ~ ., data = sonar) %>%
 ## Datasets
 
 ```{r}
-#hepatitis <-
+hepatitis <- read.csv("hepatitis/hepatitis.data", header = FALSE)
+hepatitis$V1 <- as.factor(hepatitis$V1)
+spect <- rbind(read.csv("spect/SPECT.train", header = FALSE), read.csv("spect/SPECT.test", header = FALSE))
+spect$V1 <- as.factor(spect$V1)
+pima <- read.csv("pima/pima-indians-diabetes.data", header = FALSE) %>% rename(V1 = V9, V9 = V1)
+pima$V1 <- as.factor(pima$V1)
 ```
+
+## Methods
+
+```{r}
+testClassifiers <- function(dataset) {
+  # The multi-layer perceptron classifier is very slow.
+  # Uncomment both the algorithm and the name in the list to enable.
+  # Will take ~1 minute to execute on a Core i7-5700HQ @ 2.7GHz
+  algorithms <- c(
+    J48,
+    RF,
+    SMO,
+    NB,
+    #MLP, # THIS IS VERY SLOW. UNCOMMENT AT YOUR OWN RISK!
+    C45Bagging,
+    AdaBoostM1)
+  res <- c()
+  for (func in algorithms) {
+    subres <- c()
+    for (i in 1:10) {
+      subres <- c(
+        subres, 
+        list(
+          calculateMetrics(
+            evaluate_Weka_classifier(
+              func(V1 ~ ., dataset, options = list(model = TRUE)),
+              numFolds = 10))))
+    }
+    res <- c(res, list(subres))
+  }
+  names(res) <- c(
+    "C4.5",
+    "RandomForest",
+    "Support Vector Machine",
+    "Naive Bayes",
+    #"Neural Network", # THIS IS VERY SLOW. UNCOMMENT AT YOUR OWN RISK!
+    "Bagging",
+    "Boosting")
+  
+  res <- lapply(res, rbind_all)
+  return(res)
+}
+```
+
+## Calcluations
+
+
+## Comparisons
+
