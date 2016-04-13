@@ -182,33 +182,33 @@ calculateMetrics &lt;- function(kfold) {
 ## 
 ## === Summary ===
 ## 
-## Correctly Classified Instances         147               70.6731 %
-## Incorrectly Classified Instances        61               29.3269 %
-## Kappa statistic                          0.4104
-## Mean absolute error                      0.2971
-## Root mean squared error                  0.5292
-## Relative absolute error                 59.6769 %
-## Root relative squared error            106.0618 %
-## Coverage of cases (0.95 level)          75.9615 %
-## Mean rel. region size (0.95 level)      56.7308 %
+## Correctly Classified Instances         159               76.4423 %
+## Incorrectly Classified Instances        49               23.5577 %
+## Kappa statistic                          0.5264
+## Mean absolute error                      0.2408
+## Root mean squared error                  0.4763
+## Relative absolute error                 48.3616 %
+## Root relative squared error             95.465  %
+## Coverage of cases (0.95 level)          80.2885 %
+## Mean rel. region size (0.95 level)      55.7692 %
 ## Total Number of Instances              208     
 ## 
 ## === Confusion Matrix ===
 ## 
 ##   a  b   &lt;-- classified as
-##  81 30 |  a = M
-##  31 66 |  b = R</code></pre>
+##  87 24 |  a = M
+##  25 72 |  b = R</code></pre>
 <pre><code>## $Accuracy
-## [1] 0.7067308
+## [1] 0.7644231
 ## 
 ## $Precision
-## [1] 0.7232143
+## [1] 0.7767857
 ## 
 ## $Recall
-## [1] 0.7297297
+## [1] 0.7837838
 ## 
 ## $F1
-## [1] 0.7264574</code></pre>
+## [1] 0.7802691</code></pre>
 <p>Accuracy, Mean Error, precision, recall, f-score</p>
 </div>
 <div id="other-classifiers" class="section level1">
@@ -242,33 +242,33 @@ RF(V1 ~ ., data = sonar) %&gt;%
 ## 
 ## === Summary ===
 ## 
-## Correctly Classified Instances         177               85.0962 %
-## Incorrectly Classified Instances        31               14.9038 %
-## Kappa statistic                          0.6968
-## Mean absolute error                      0.3019
-## Root mean squared error                  0.3476
-## Relative absolute error                 60.6496 %
-## Root relative squared error             69.665  %
+## Correctly Classified Instances         174               83.6538 %
+## Incorrectly Classified Instances        34               16.3462 %
+## Kappa statistic                          0.6681
+## Mean absolute error                      0.3076
+## Root mean squared error                  0.355 
+## Relative absolute error                 61.7988 %
+## Root relative squared error             71.1479 %
 ## Coverage of cases (0.95 level)         100      %
-## Mean rel. region size (0.95 level)      97.1154 %
+## Mean rel. region size (0.95 level)      97.5962 %
 ## Total Number of Instances              208     
 ## 
 ## === Confusion Matrix ===
 ## 
 ##    a   b   &lt;-- classified as
-##  105   6 |   a = M
+##  102   9 |   a = M
 ##   25  72 |   b = R</code></pre>
 <pre><code>## $Accuracy
-## [1] 0.8509615
+## [1] 0.8365385
 ## 
 ## $Precision
-## [1] 0.8076923
+## [1] 0.8031496
 ## 
 ## $Recall
-## [1] 0.9459459
+## [1] 0.9189189
 ## 
 ## $F1
-## [1] 0.8713693</code></pre>
+## [1] 0.8571429</code></pre>
 </div>
 <div id="support-vector-machine" class="section level2">
 <h2>Support Vector Machine</h2>
@@ -300,7 +300,7 @@ RF(V1 ~ ., data = sonar) %&gt;%
 ## 
 ## Correctly Classified Instances         162               77.8846 %
 ## Incorrectly Classified Instances        46               22.1154 %
-## Kappa statistic                          0.5539
+## Kappa statistic                          0.5551
 ## Mean absolute error                      0.2212
 ## Root mean squared error                  0.4703
 ## Relative absolute error                 44.4249 %
@@ -312,19 +312,19 @@ RF(V1 ~ ., data = sonar) %&gt;%
 ## === Confusion Matrix ===
 ## 
 ##   a  b   &lt;-- classified as
-##  91 20 |  a = M
-##  26 71 |  b = R</code></pre>
+##  89 22 |  a = M
+##  24 73 |  b = R</code></pre>
 <pre><code>## $Accuracy
 ## [1] 0.7788462
 ## 
 ## $Precision
-## [1] 0.7777778
+## [1] 0.7876106
 ## 
 ## $Recall
-## [1] 0.8198198
+## [1] 0.8018018
 ## 
 ## $F1
-## [1] 0.7982456</code></pre>
+## [1] 0.7946429</code></pre>
 </div>
 <div id="naive-bayes-classifier" class="section level2">
 <h2>Naive Bayes Classifier</h2>
@@ -355,33 +355,33 @@ NB(V1 ~ ., data = sonar) %&gt;%
 ## 
 ## === Summary ===
 ## 
-## Correctly Classified Instances         145               69.7115 %
-## Incorrectly Classified Instances        63               30.2885 %
-## Kappa statistic                          0.402 
-## Mean absolute error                      0.312 
-## Root mean squared error                  0.5305
-## Relative absolute error                 62.6682 %
-## Root relative squared error            106.3255 %
-## Coverage of cases (0.95 level)          76.9231 %
-## Mean rel. region size (0.95 level)      58.6538 %
+## Correctly Classified Instances         139               66.8269 %
+## Incorrectly Classified Instances        69               33.1731 %
+## Kappa statistic                          0.345 
+## Mean absolute error                      0.3192
+## Root mean squared error                  0.5361
+## Relative absolute error                 64.1222 %
+## Root relative squared error            107.4421 %
+## Coverage of cases (0.95 level)          76.4423 %
+## Mean rel. region size (0.95 level)      58.1731 %
 ## Total Number of Instances              208     
 ## 
 ## === Confusion Matrix ===
 ## 
 ##   a  b   &lt;-- classified as
-##  66 45 |  a = M
-##  18 79 |  b = R</code></pre>
+##  63 48 |  a = M
+##  21 76 |  b = R</code></pre>
 <pre><code>## $Accuracy
-## [1] 0.6971154
+## [1] 0.6682692
 ## 
 ## $Precision
-## [1] 0.7857143
+## [1] 0.75
 ## 
 ## $Recall
-## [1] 0.5945946
+## [1] 0.5675676
 ## 
 ## $F1
-## [1] 0.6769231</code></pre>
+## [1] 0.6461538</code></pre>
 </div>
 <div id="neural-network" class="section level2">
 <h2>Neural Network</h2>
@@ -412,33 +412,33 @@ MLP(V1 ~ ., data = sonar) %&gt;%
 ## 
 ## === Summary ===
 ## 
-## Correctly Classified Instances         172               82.6923 %
-## Incorrectly Classified Instances        36               17.3077 %
-## Kappa statistic                          0.6518
-## Mean absolute error                      0.1702
-## Root mean squared error                  0.3755
-## Relative absolute error                 34.1884 %
-## Root relative squared error             75.2593 %
-## Coverage of cases (0.95 level)          90.3846 %
-## Mean rel. region size (0.95 level)      57.6923 %
+## Correctly Classified Instances         173               83.1731 %
+## Incorrectly Classified Instances        35               16.8269 %
+## Kappa statistic                          0.6608
+## Mean absolute error                      0.1747
+## Root mean squared error                  0.3761
+## Relative absolute error                 35.0987 %
+## Root relative squared error             75.3899 %
+## Coverage of cases (0.95 level)          90.8654 %
+## Mean rel. region size (0.95 level)      59.6154 %
 ## Total Number of Instances              208     
 ## 
 ## === Confusion Matrix ===
 ## 
 ##   a  b   &lt;-- classified as
-##  94 17 |  a = M
-##  19 78 |  b = R</code></pre>
+##  96 15 |  a = M
+##  20 77 |  b = R</code></pre>
 <pre><code>## $Accuracy
-## [1] 0.8269231
+## [1] 0.8317308
 ## 
 ## $Precision
-## [1] 0.8318584
+## [1] 0.8275862
 ## 
 ## $Recall
-## [1] 0.8468468
+## [1] 0.8648649
 ## 
 ## $F1
-## [1] 0.8392857</code></pre>
+## [1] 0.845815</code></pre>
 </div>
 <div id="bagging" class="section level2">
 <h2>Bagging</h2>
@@ -471,33 +471,33 @@ C45Bagging(V1 ~ ., data = sonar) %&gt;%
 ## 
 ## === Summary ===
 ## 
-## Correctly Classified Instances         158               75.9615 %
-## Incorrectly Classified Instances        50               24.0385 %
-## Kappa statistic                          0.5139
-## Mean absolute error                      0.3151
-## Root mean squared error                  0.4025
-## Relative absolute error                 63.2946 %
-## Root relative squared error             80.6714 %
-## Coverage of cases (0.95 level)          99.0385 %
-## Mean rel. region size (0.95 level)      90.3846 %
+## Correctly Classified Instances         163               78.3654 %
+## Incorrectly Classified Instances        45               21.6346 %
+## Kappa statistic                          0.5634
+## Mean absolute error                      0.308 
+## Root mean squared error                  0.3926
+## Relative absolute error                 61.8773 %
+## Root relative squared error             78.697  %
+## Coverage of cases (0.95 level)          98.5577 %
+## Mean rel. region size (0.95 level)      90.625  %
 ## Total Number of Instances              208     
 ## 
 ## === Confusion Matrix ===
 ## 
 ##   a  b   &lt;-- classified as
-##  91 20 |  a = M
-##  30 67 |  b = R</code></pre>
+##  92 19 |  a = M
+##  26 71 |  b = R</code></pre>
 <pre><code>## $Accuracy
-## [1] 0.7596154
+## [1] 0.7836538
 ## 
 ## $Precision
-## [1] 0.7520661
+## [1] 0.779661
 ## 
 ## $Recall
-## [1] 0.8198198
+## [1] 0.8288288
 ## 
 ## $F1
-## [1] 0.7844828</code></pre>
+## [1] 0.8034934</code></pre>
 </div>
 <div id="boosting" class="section level2">
 <h2>Boosting</h2>
@@ -527,33 +527,33 @@ C45Bagging(V1 ~ ., data = sonar) %&gt;%
 ## 
 ## === Summary ===
 ## 
-## Correctly Classified Instances         156               75      %
-## Incorrectly Classified Instances        52               25      %
-## Kappa statistic                          0.4977
-## Mean absolute error                      0.2763
-## Root mean squared error                  0.4087
-## Relative absolute error                 55.5066 %
-## Root relative squared error             81.9219 %
-## Coverage of cases (0.95 level)          95.6731 %
-## Mean rel. region size (0.95 level)      82.6923 %
+## Correctly Classified Instances         157               75.4808 %
+## Incorrectly Classified Instances        51               24.5192 %
+## Kappa statistic                          0.5025
+## Mean absolute error                      0.2895
+## Root mean squared error                  0.4216
+## Relative absolute error                 58.1635 %
+## Root relative squared error             84.4971 %
+## Coverage of cases (0.95 level)          97.5962 %
+## Mean rel. region size (0.95 level)      82.9327 %
 ## Total Number of Instances              208     
 ## 
 ## === Confusion Matrix ===
 ## 
 ##   a  b   &lt;-- classified as
-##  85 26 |  a = M
-##  26 71 |  b = R</code></pre>
+##  93 18 |  a = M
+##  33 64 |  b = R</code></pre>
 <pre><code>## $Accuracy
-## [1] 0.75
+## [1] 0.7548077
 ## 
 ## $Precision
-## [1] 0.7657658
+## [1] 0.7380952
 ## 
 ## $Recall
-## [1] 0.7657658
+## [1] 0.8378378
 ## 
 ## $F1
-## [1] 0.7657658</code></pre>
+## [1] 0.7848101</code></pre>
 </div>
 </div>
 <div id="satistically-significant-results" class="section level1">
@@ -601,8 +601,8 @@ names(datasets) &lt;- c(&quot;Sonar&quot;, &quot;Hepatitis&quot;, &quot;Spect&qu
   }
   names(res) &lt;- c(
     &quot;C4.5&quot;,
-    &quot;RandomForest&quot;,
-    &quot;Support Vector Machine&quot;,
+    &quot;Random Forest&quot;,
+    &quot;SVM&quot;,
     &quot;Naive Bayes&quot;,
     #&quot;Neural Network&quot;, # THIS IS VERY SLOW. UNCOMMENT AT YOUR OWN RISK!
     &quot;Bagging&quot;,
@@ -610,6 +610,33 @@ names(datasets) &lt;- c(&quot;Sonar&quot;, &quot;Hepatitis&quot;, &quot;Spect&qu
   
   res &lt;- lapply(res, rbind_all)
   return(res)
+}
+
+pairwiseTesting &lt;- function(calcs) {
+  cols &lt;-c(&quot;Accuracy&quot;, &quot;Precision&quot;, &quot;Recall&quot;, &quot;F1&quot;)
+  inv &lt;- lapply(cols, function(x) {
+    sapply(calcs, &quot;[[&quot;, i = x) %&gt;% data.frame()
+  })
+  names(inv) &lt;- cols
+
+  lapply(inv, function(metricDF) {
+    sapply(metricDF, function(var1) {
+      sapply(metricDF, function(var2) {
+        tmp &lt;- t.test(var1, var2)
+        paste(
+          tmp$statistic[[1]] %&gt;% round(3),
+          tmp$p.value %&gt;% round(3),
+          sep = &quot;,p=&quot;)
+      })
+    }) %&gt;% data.frame()
+  })
+}
+
+kableMetrics &lt;- function(results, caption) {
+  results$Accuracy %&gt;% kable(caption = paste(caption, &quot;Accuracy&quot;)) %&gt;% print()
+  results$Precision %&gt;% kable(caption = paste(caption, &quot;Precision&quot;)) %&gt;% print()
+  results$Recall %&gt;% kable(caption = paste(caption, &quot;Recall&quot;)) %&gt;% print()
+  results$F1 %&gt;% kable(caption = paste(caption, &quot;F1 Score&quot;)) %&gt;% print()
 }</code></pre>
 </div>
 <div id="calcluations" class="section level2">
@@ -629,8 +656,8 @@ sapply(metrics, &quot;[&quot;, i = &quot;Accuracy&quot;, j = 1:6) %&gt;% data.fr
 <tr class="header">
 <th align="left"></th>
 <th align="right">C4.5</th>
-<th align="right">RandomForest</th>
-<th align="right">Support Vector Machine</th>
+<th align="right">Random Forest</th>
+<th align="right">SVM</th>
 <th align="right">Naive Bayes</th>
 <th align="right">Bagging</th>
 <th align="right">Boosting</th>
@@ -639,38 +666,38 @@ sapply(metrics, &quot;[&quot;, i = &quot;Accuracy&quot;, j = 1:6) %&gt;% data.fr
 <tbody>
 <tr class="odd">
 <td align="left">Sonar</td>
-<td align="right">0.7293269</td>
-<td align="right">0.8423077</td>
-<td align="right">0.7649038</td>
-<td align="right">0.6817308</td>
-<td align="right">0.7778846</td>
+<td align="right">0.7206731</td>
+<td align="right">0.8370192</td>
+<td align="right">0.7807692</td>
+<td align="right">0.6788462</td>
+<td align="right">0.7677885</td>
 <td align="right">0.7543269</td>
 </tr>
 <tr class="even">
 <td align="left">Hepatitis</td>
 <td align="right">0.8322581</td>
-<td align="right">0.7980645</td>
-<td align="right">0.8038710</td>
+<td align="right">0.7993548</td>
+<td align="right">0.8096774</td>
+<td align="right">0.8238710</td>
 <td align="right">0.8232258</td>
-<td align="right">0.8193548</td>
-<td align="right">0.8064516</td>
+<td align="right">0.8051613</td>
 </tr>
 <tr class="odd">
 <td align="left">Spect</td>
-<td align="right">0.8067416</td>
-<td align="right">0.8198502</td>
-<td align="right">0.8329588</td>
-<td align="right">0.7662921</td>
+<td align="right">0.8138577</td>
+<td align="right">0.8232210</td>
+<td align="right">0.8292135</td>
+<td align="right">0.7621723</td>
 <td align="right">0.8277154</td>
-<td align="right">0.7812734</td>
+<td align="right">0.7895131</td>
 </tr>
 <tr class="even">
 <td align="left">Pima</td>
-<td align="right">0.7393229</td>
-<td align="right">0.7604167</td>
-<td align="right">0.7695312</td>
-<td align="right">0.7576823</td>
-<td align="right">0.7535156</td>
+<td align="right">0.7479167</td>
+<td align="right">0.7667969</td>
+<td align="right">0.7673177</td>
+<td align="right">0.7559896</td>
+<td align="right">0.7477865</td>
 <td align="right">0.7446615</td>
 </tr>
 </tbody>
@@ -682,8 +709,8 @@ sapply(metrics, &quot;[&quot;, i = &quot;Accuracy&quot;, j = 1:6) %&gt;% data.fr
 <tr class="header">
 <th align="left"></th>
 <th align="right">C4.5</th>
-<th align="right">RandomForest</th>
-<th align="right">Support Vector Machine</th>
+<th align="right">Random Forest</th>
+<th align="right">SVM</th>
 <th align="right">Naive Bayes</th>
 <th align="right">Bagging</th>
 <th align="right">Boosting</th>
@@ -692,39 +719,39 @@ sapply(metrics, &quot;[&quot;, i = &quot;Accuracy&quot;, j = 1:6) %&gt;% data.fr
 <tbody>
 <tr class="odd">
 <td align="left">Sonar</td>
-<td align="right">0.7469085</td>
-<td align="right">0.8151072</td>
-<td align="right">0.7706873</td>
-<td align="right">0.7765718</td>
-<td align="right">0.7658840</td>
-<td align="right">0.7562385</td>
+<td align="right">0.7316533</td>
+<td align="right">0.8133134</td>
+<td align="right">0.7803481</td>
+<td align="right">0.7702072</td>
+<td align="right">0.7608739</td>
+<td align="right">0.7688520</td>
 </tr>
 <tr class="even">
 <td align="left">Hepatitis</td>
-<td align="right">0.6383521</td>
-<td align="right">0.5500000</td>
-<td align="right">0.5280762</td>
-<td align="right">0.5575942</td>
-<td align="right">0.6048564</td>
-<td align="right">0.5538287</td>
+<td align="right">0.6375415</td>
+<td align="right">0.7483333</td>
+<td align="right">0.5408220</td>
+<td align="right">0.5596820</td>
+<td align="right">0.6377331</td>
+<td align="right">0.5477519</td>
 </tr>
 <tr class="odd">
 <td align="left">Spect</td>
-<td align="right">0.5367017</td>
-<td align="right">0.5774833</td>
-<td align="right">0.6093587</td>
-<td align="right">0.4593940</td>
-<td align="right">0.6096828</td>
-<td align="right">0.4511124</td>
+<td align="right">0.5594900</td>
+<td align="right">0.5877339</td>
+<td align="right">0.5964238</td>
+<td align="right">0.4535667</td>
+<td align="right">0.6190955</td>
+<td align="right">0.4857586</td>
 </tr>
 <tr class="even">
 <td align="left">Pima</td>
-<td align="right">0.7861445</td>
-<td align="right">0.7992517</td>
-<td align="right">0.7820497</td>
-<td align="right">0.7982303</td>
-<td align="right">0.7965654</td>
-<td align="right">0.7831931</td>
+<td align="right">0.7934051</td>
+<td align="right">0.8050036</td>
+<td align="right">0.7804152</td>
+<td align="right">0.7960301</td>
+<td align="right">0.7919468</td>
+<td align="right">0.7806322</td>
 </tr>
 </tbody>
 </table>
@@ -735,8 +762,8 @@ sapply(metrics, &quot;[&quot;, i = &quot;Accuracy&quot;, j = 1:6) %&gt;% data.fr
 <tr class="header">
 <th align="left"></th>
 <th align="right">C4.5</th>
-<th align="right">RandomForest</th>
-<th align="right">Support Vector Machine</th>
+<th align="right">Random Forest</th>
+<th align="right">SVM</th>
 <th align="right">Naive Bayes</th>
 <th align="right">Bagging</th>
 <th align="right">Boosting</th>
@@ -745,39 +772,39 @@ sapply(metrics, &quot;[&quot;, i = &quot;Accuracy&quot;, j = 1:6) %&gt;% data.fr
 <tbody>
 <tr class="odd">
 <td align="left">Sonar</td>
-<td align="right">0.7459459</td>
-<td align="right">0.9117117</td>
-<td align="right">0.7963964</td>
-<td align="right">0.5666667</td>
-<td align="right">0.8423423</td>
-<td align="right">0.7972973</td>
+<td align="right">0.7531532</td>
+<td align="right">0.9018018</td>
+<td align="right">0.8207207</td>
+<td align="right">0.5675676</td>
+<td align="right">0.8252252</td>
+<td align="right">0.7720721</td>
 </tr>
 <tr class="even">
 <td align="left">Hepatitis</td>
 <td align="right">0.4406250</td>
-<td align="right">0.0625000</td>
-<td align="right">0.4843750</td>
-<td align="right">0.6968750</td>
-<td align="right">0.3562500</td>
-<td align="right">0.3625000</td>
+<td align="right">0.0593750</td>
+<td align="right">0.5312500</td>
+<td align="right">0.6906250</td>
+<td align="right">0.3406250</td>
+<td align="right">0.3593750</td>
 </tr>
 <tr class="odd">
 <td align="left">Spect</td>
-<td align="right">0.4727273</td>
-<td align="right">0.4727273</td>
-<td align="right">0.5327273</td>
-<td align="right">0.7581818</td>
-<td align="right">0.4581818</td>
-<td align="right">0.2836364</td>
+<td align="right">0.4763636</td>
+<td align="right">0.4781818</td>
+<td align="right">0.5345455</td>
+<td align="right">0.7527273</td>
+<td align="right">0.4363636</td>
+<td align="right">0.3145455</td>
 </tr>
 <tr class="even">
 <td align="left">Pima</td>
-<td align="right">0.8240000</td>
-<td align="right">0.8440000</td>
-<td align="right">0.8956000</td>
-<td align="right">0.8402000</td>
-<td align="right">0.8346000</td>
+<td align="right">0.8288000</td>
+<td align="right">0.8470000</td>
+<td align="right">0.8942000</td>
 <td align="right">0.8406000</td>
+<td align="right">0.8310000</td>
+<td align="right">0.8454000</td>
 </tr>
 </tbody>
 </table>
@@ -788,8 +815,8 @@ sapply(metrics, &quot;[&quot;, i = &quot;Accuracy&quot;, j = 1:6) %&gt;% data.fr
 <tr class="header">
 <th align="left"></th>
 <th align="right">C4.5</th>
-<th align="right">RandomForest</th>
-<th align="right">Support Vector Machine</th>
+<th align="right">Random Forest</th>
+<th align="right">SVM</th>
 <th align="right">Naive Bayes</th>
 <th align="right">Bagging</th>
 <th align="right">Boosting</th>
@@ -798,45 +825,1172 @@ sapply(metrics, &quot;[&quot;, i = &quot;Accuracy&quot;, j = 1:6) %&gt;% data.fr
 <tbody>
 <tr class="odd">
 <td align="left">Sonar</td>
-<td align="right">0.7462555</td>
-<td align="right">0.8605846</td>
-<td align="right">0.7832888</td>
-<td align="right">0.6551844</td>
-<td align="right">0.8019136</td>
-<td align="right">0.7760680</td>
+<td align="right">0.7418398</td>
+<td align="right">0.8551324</td>
+<td align="right">0.7998778</td>
+<td align="right">0.6534370</td>
+<td align="right">0.7913050</td>
+<td align="right">0.7701343</td>
 </tr>
 <tr class="even">
 <td align="left">Hepatitis</td>
-<td align="right">0.5206495</td>
-<td align="right">NaN</td>
-<td align="right">0.5049129</td>
-<td align="right">0.6192683</td>
-<td align="right">0.4468226</td>
-<td align="right">0.4359535</td>
+<td align="right">0.5205130</td>
+<td align="right">0.1082075</td>
+<td align="right">0.5354537</td>
+<td align="right">0.6180788</td>
+<td align="right">0.4423786</td>
+<td align="right">0.4314497</td>
 </tr>
 <tr class="odd">
 <td align="left">Spect</td>
-<td align="right">0.5023480</td>
-<td align="right">0.5194976</td>
-<td align="right">0.5674260</td>
-<td align="right">0.5720586</td>
-<td align="right">0.5228650</td>
-<td align="right">0.3405869</td>
+<td align="right">0.5137839</td>
+<td align="right">0.5269128</td>
+<td align="right">0.5630574</td>
+<td align="right">0.5660073</td>
+<td align="right">0.5108548</td>
+<td align="right">0.3718512</td>
 </tr>
 <tr class="even">
 <td align="left">Pima</td>
-<td align="right">0.8044036</td>
-<td align="right">0.8210019</td>
-<td align="right">0.8349784</td>
-<td align="right">0.8186719</td>
-<td align="right">0.8151045</td>
-<td align="right">0.8108406</td>
+<td align="right">0.8106380</td>
+<td align="right">0.8254454</td>
+<td align="right">0.8334372</td>
+<td align="right">0.8177019</td>
+<td align="right">0.8109500</td>
+<td align="right">0.8116824</td>
 </tr>
 </tbody>
 </table>
 </div>
 <div id="comparisons" class="section level2">
 <h2>Comparisons</h2>
+<pre class="r"><code>pairwiseTesting(calculations$Sonar) %&gt;% kableMetrics(&quot;Sonar Dataset&quot;)</code></pre>
+<table>
+<caption>Sonar Dataset Accuracy</caption>
+<thead>
+<tr class="header">
+<th align="left"></th>
+<th align="left">C4.5</th>
+<th align="left">Random.Forest</th>
+<th align="left">SVM</th>
+<th align="left">Naive.Bayes</th>
+<th align="left">Bagging</th>
+<th align="left">Boosting</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">C4.5</td>
+<td align="left">0,p=1</td>
+<td align="left">8.938,p=0</td>
+<td align="left">4.497,p=0.001</td>
+<td align="left">-3.346,p=0.007</td>
+<td align="left">3.37,p=0.004</td>
+<td align="left">2.369,p=0.032</td>
+</tr>
+<tr class="even">
+<td align="left">Random.Forest</td>
+<td align="left">-8.938,p=0</td>
+<td align="left">0,p=1</td>
+<td align="left">-7.53,p=0</td>
+<td align="left">-27.322,p=0</td>
+<td align="left">-8.121,p=0</td>
+<td align="left">-9.301,p=0</td>
+</tr>
+<tr class="odd">
+<td align="left">SVM</td>
+<td align="left">-4.497,p=0.001</td>
+<td align="left">7.53,p=0</td>
+<td align="left">0,p=1</td>
+<td align="left">-15.61,p=0</td>
+<td align="left">-1.435,p=0.169</td>
+<td align="left">-2.816,p=0.012</td>
+</tr>
+<tr class="even">
+<td align="left">Naive.Bayes</td>
+<td align="left">3.346,p=0.007</td>
+<td align="left">27.322,p=0</td>
+<td align="left">15.61,p=0</td>
+<td align="left">0,p=1</td>
+<td align="left">11.53,p=0</td>
+<td align="left">9.3,p=0</td>
+</tr>
+<tr class="odd">
+<td align="left">Bagging</td>
+<td align="left">-3.37,p=0.004</td>
+<td align="left">8.121,p=0</td>
+<td align="left">1.435,p=0.169</td>
+<td align="left">-11.53,p=0</td>
+<td align="left">0,p=1</td>
+<td align="left">-1.313,p=0.206</td>
+</tr>
+<tr class="even">
+<td align="left">Boosting</td>
+<td align="left">-2.369,p=0.032</td>
+<td align="left">9.301,p=0</td>
+<td align="left">2.816,p=0.012</td>
+<td align="left">-9.3,p=0</td>
+<td align="left">1.313,p=0.206</td>
+<td align="left">0,p=1</td>
+</tr>
+</tbody>
+</table>
+<table>
+<caption>Sonar Dataset Precision</caption>
+<thead>
+<tr class="header">
+<th align="left"></th>
+<th align="left">C4.5</th>
+<th align="left">Random.Forest</th>
+<th align="left">SVM</th>
+<th align="left">Naive.Bayes</th>
+<th align="left">Bagging</th>
+<th align="left">Boosting</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">C4.5</td>
+<td align="left">0,p=1</td>
+<td align="left">6.834,p=0</td>
+<td align="left">3.796,p=0.002</td>
+<td align="left">3.312,p=0.007</td>
+<td align="left">2.165,p=0.046</td>
+<td align="left">2.851,p=0.012</td>
+</tr>
+<tr class="even">
+<td align="left">Random.Forest</td>
+<td align="left">-6.834,p=0</td>
+<td align="left">0,p=1</td>
+<td align="left">-4.149,p=0.001</td>
+<td align="left">-7.381,p=0</td>
+<td align="left">-5.834,p=0</td>
+<td align="left">-5.36,p=0</td>
+</tr>
+<tr class="odd">
+<td align="left">SVM</td>
+<td align="left">-3.796,p=0.002</td>
+<td align="left">4.149,p=0.001</td>
+<td align="left">0,p=1</td>
+<td align="left">-1.357,p=0.196</td>
+<td align="left">-1.923,p=0.071</td>
+<td align="left">-1.208,p=0.243</td>
+</tr>
+<tr class="even">
+<td align="left">Naive.Bayes</td>
+<td align="left">-3.312,p=0.007</td>
+<td align="left">7.381,p=0</td>
+<td align="left">1.357,p=0.196</td>
+<td align="left">0,p=1</td>
+<td align="left">-1.088,p=0.296</td>
+<td align="left">-0.173,p=0.865</td>
+</tr>
+<tr class="odd">
+<td align="left">Bagging</td>
+<td align="left">-2.165,p=0.046</td>
+<td align="left">5.834,p=0</td>
+<td align="left">1.923,p=0.071</td>
+<td align="left">1.088,p=0.296</td>
+<td align="left">0,p=1</td>
+<td align="left">0.767,p=0.453</td>
+</tr>
+<tr class="even">
+<td align="left">Boosting</td>
+<td align="left">-2.851,p=0.012</td>
+<td align="left">5.36,p=0</td>
+<td align="left">1.208,p=0.243</td>
+<td align="left">0.173,p=0.865</td>
+<td align="left">-0.767,p=0.453</td>
+<td align="left">0,p=1</td>
+</tr>
+</tbody>
+</table>
+<table>
+<caption>Sonar Dataset Recall</caption>
+<thead>
+<tr class="header">
+<th align="left"></th>
+<th align="left">C4.5</th>
+<th align="left">Random.Forest</th>
+<th align="left">SVM</th>
+<th align="left">Naive.Bayes</th>
+<th align="left">Bagging</th>
+<th align="left">Boosting</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">C4.5</td>
+<td align="left">0,p=1</td>
+<td align="left">8.959,p=0</td>
+<td align="left">4.242,p=0.001</td>
+<td align="left">-11.713,p=0</td>
+<td align="left">4.018,p=0.001</td>
+<td align="left">1.021,p=0.322</td>
+</tr>
+<tr class="even">
+<td align="left">Random.Forest</td>
+<td align="left">-8.959,p=0</td>
+<td align="left">0,p=1</td>
+<td align="left">-9.01,p=0</td>
+<td align="left">-37.756,p=0</td>
+<td align="left">-6.272,p=0</td>
+<td align="left">-9.937,p=0</td>
+</tr>
+<tr class="odd">
+<td align="left">SVM</td>
+<td align="left">-4.242,p=0.001</td>
+<td align="left">9.01,p=0</td>
+<td align="left">0,p=1</td>
+<td align="left">-33.613,p=0</td>
+<td align="left">0.399,p=0.696</td>
+<td align="left">-3.988,p=0.001</td>
+</tr>
+<tr class="even">
+<td align="left">Naive.Bayes</td>
+<td align="left">11.713,p=0</td>
+<td align="left">37.756,p=0</td>
+<td align="left">33.613,p=0</td>
+<td align="left">0,p=1</td>
+<td align="left">23.063,p=0</td>
+<td align="left">16.914,p=0</td>
+</tr>
+<tr class="odd">
+<td align="left">Bagging</td>
+<td align="left">-4.018,p=0.001</td>
+<td align="left">6.272,p=0</td>
+<td align="left">-0.399,p=0.696</td>
+<td align="left">-23.063,p=0</td>
+<td align="left">0,p=1</td>
+<td align="left">-3.609,p=0.002</td>
+</tr>
+<tr class="even">
+<td align="left">Boosting</td>
+<td align="left">-1.021,p=0.322</td>
+<td align="left">9.937,p=0</td>
+<td align="left">3.988,p=0.001</td>
+<td align="left">-16.914,p=0</td>
+<td align="left">3.609,p=0.002</td>
+<td align="left">0,p=1</td>
+</tr>
+</tbody>
+</table>
+<table>
+<caption>Sonar Dataset F1 Score</caption>
+<thead>
+<tr class="header">
+<th align="left"></th>
+<th align="left">C4.5</th>
+<th align="left">Random.Forest</th>
+<th align="left">SVM</th>
+<th align="left">Naive.Bayes</th>
+<th align="left">Bagging</th>
+<th align="left">Boosting</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">C4.5</td>
+<td align="left">0,p=1</td>
+<td align="left">8.984,p=0</td>
+<td align="left">4.552,p=0.001</td>
+<td align="left">-7.078,p=0</td>
+<td align="left">3.708,p=0.002</td>
+<td align="left">2.028,p=0.06</td>
+</tr>
+<tr class="even">
+<td align="left">Random.Forest</td>
+<td align="left">-8.984,p=0</td>
+<td align="left">0,p=1</td>
+<td align="left">-8.322,p=0</td>
+<td align="left">-32.94,p=0</td>
+<td align="left">-8.28,p=0</td>
+<td align="left">-9.745,p=0</td>
+</tr>
+<tr class="odd">
+<td align="left">SVM</td>
+<td align="left">-4.552,p=0.001</td>
+<td align="left">8.322,p=0</td>
+<td align="left">0,p=1</td>
+<td align="left">-22.854,p=0</td>
+<td align="left">-1.08,p=0.295</td>
+<td align="left">-3.333,p=0.004</td>
+</tr>
+<tr class="even">
+<td align="left">Naive.Bayes</td>
+<td align="left">7.078,p=0</td>
+<td align="left">32.94,p=0</td>
+<td align="left">22.854,p=0</td>
+<td align="left">0,p=1</td>
+<td align="left">18.358,p=0</td>
+<td align="left">13.653,p=0</td>
+</tr>
+<tr class="odd">
+<td align="left">Bagging</td>
+<td align="left">-3.708,p=0.002</td>
+<td align="left">8.28,p=0</td>
+<td align="left">1.08,p=0.295</td>
+<td align="left">-18.358,p=0</td>
+<td align="left">0,p=1</td>
+<td align="left">-2.172,p=0.044</td>
+</tr>
+<tr class="even">
+<td align="left">Boosting</td>
+<td align="left">-2.028,p=0.06</td>
+<td align="left">9.745,p=0</td>
+<td align="left">3.333,p=0.004</td>
+<td align="left">-13.653,p=0</td>
+<td align="left">2.172,p=0.044</td>
+<td align="left">0,p=1</td>
+</tr>
+</tbody>
+</table>
+<pre class="r"><code>pairwiseTesting(calculations$Hepatitis) %&gt;% kableMetrics(&quot;Hepatitis Dataset&quot;)</code></pre>
+<table>
+<caption>Hepatitis Dataset Accuracy</caption>
+<thead>
+<tr class="header">
+<th align="left"></th>
+<th align="left">C4.5</th>
+<th align="left">Random.Forest</th>
+<th align="left">SVM</th>
+<th align="left">Naive.Bayes</th>
+<th align="left">Bagging</th>
+<th align="left">Boosting</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">C4.5</td>
+<td align="left">0,p=1</td>
+<td align="left">-7.565,p=0</td>
+<td align="left">-3.955,p=0.001</td>
+<td align="left">-1.857,p=0.08</td>
+<td align="left">-1.606,p=0.127</td>
+<td align="left">-4.257,p=0.001</td>
+</tr>
+<tr class="even">
+<td align="left">Random.Forest</td>
+<td align="left">7.565,p=0</td>
+<td align="left">0,p=1</td>
+<td align="left">1.906,p=0.076</td>
+<td align="left">5.927,p=0</td>
+<td align="left">4.483,p=0</td>
+<td align="left">0.952,p=0.358</td>
+</tr>
+<tr class="odd">
+<td align="left">SVM</td>
+<td align="left">3.955,p=0.001</td>
+<td align="left">-1.906,p=0.076</td>
+<td align="left">0,p=1</td>
+<td align="left">2.557,p=0.021</td>
+<td align="left">2.09,p=0.051</td>
+<td align="left">-0.633,p=0.535</td>
+</tr>
+<tr class="even">
+<td align="left">Naive.Bayes</td>
+<td align="left">1.857,p=0.08</td>
+<td align="left">-5.927,p=0</td>
+<td align="left">-2.557,p=0.021</td>
+<td align="left">0,p=1</td>
+<td align="left">-0.118,p=0.907</td>
+<td align="left">-3.007,p=0.009</td>
+</tr>
+<tr class="odd">
+<td align="left">Bagging</td>
+<td align="left">1.606,p=0.127</td>
+<td align="left">-4.483,p=0</td>
+<td align="left">-2.09,p=0.051</td>
+<td align="left">0.118,p=0.907</td>
+<td align="left">0,p=1</td>
+<td align="left">-2.556,p=0.02</td>
+</tr>
+<tr class="even">
+<td align="left">Boosting</td>
+<td align="left">4.257,p=0.001</td>
+<td align="left">-0.952,p=0.358</td>
+<td align="left">0.633,p=0.535</td>
+<td align="left">3.007,p=0.009</td>
+<td align="left">2.556,p=0.02</td>
+<td align="left">0,p=1</td>
+</tr>
+</tbody>
+</table>
+<table>
+<caption>Hepatitis Dataset Precision</caption>
+<thead>
+<tr class="header">
+<th align="left"></th>
+<th align="left">C4.5</th>
+<th align="left">Random.Forest</th>
+<th align="left">SVM</th>
+<th align="left">Naive.Bayes</th>
+<th align="left">Bagging</th>
+<th align="left">Boosting</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">C4.5</td>
+<td align="left">0,p=1</td>
+<td align="left">1.3,p=0.224</td>
+<td align="left">-5.294,p=0</td>
+<td align="left">-5.171,p=0</td>
+<td align="left">0.007,p=0.995</td>
+<td align="left">-3.739,p=0.002</td>
+</tr>
+<tr class="even">
+<td align="left">Random.Forest</td>
+<td align="left">-1.3,p=0.224</td>
+<td align="left">0,p=1</td>
+<td align="left">-2.443,p=0.036</td>
+<td align="left">-2.237,p=0.052</td>
+<td align="left">-1.266,p=0.233</td>
+<td align="left">-2.322,p=0.043</td>
+</tr>
+<tr class="odd">
+<td align="left">SVM</td>
+<td align="left">5.294,p=0</td>
+<td align="left">2.443,p=0.036</td>
+<td align="left">0,p=1</td>
+<td align="left">1.384,p=0.189</td>
+<td align="left">3.644,p=0.003</td>
+<td align="left">0.299,p=0.769</td>
+</tr>
+<tr class="even">
+<td align="left">Naive.Bayes</td>
+<td align="left">5.171,p=0</td>
+<td align="left">2.237,p=0.052</td>
+<td align="left">-1.384,p=0.189</td>
+<td align="left">0,p=1</td>
+<td align="left">3.185,p=0.009</td>
+<td align="left">-0.576,p=0.576</td>
+</tr>
+<tr class="odd">
+<td align="left">Bagging</td>
+<td align="left">-0.007,p=0.995</td>
+<td align="left">1.266,p=0.233</td>
+<td align="left">-3.644,p=0.003</td>
+<td align="left">-3.185,p=0.009</td>
+<td align="left">0,p=1</td>
+<td align="left">-2.919,p=0.009</td>
+</tr>
+<tr class="even">
+<td align="left">Boosting</td>
+<td align="left">3.739,p=0.002</td>
+<td align="left">2.322,p=0.043</td>
+<td align="left">-0.299,p=0.769</td>
+<td align="left">0.576,p=0.576</td>
+<td align="left">2.919,p=0.009</td>
+<td align="left">0,p=1</td>
+</tr>
+</tbody>
+</table>
+<table>
+<caption>Hepatitis Dataset Recall</caption>
+<thead>
+<tr class="header">
+<th align="left"></th>
+<th align="left">C4.5</th>
+<th align="left">Random.Forest</th>
+<th align="left">SVM</th>
+<th align="left">Naive.Bayes</th>
+<th align="left">Bagging</th>
+<th align="left">Boosting</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">C4.5</td>
+<td align="left">0,p=1</td>
+<td align="left">-41.441,p=0</td>
+<td align="left">7.127,p=0</td>
+<td align="left">22.094,p=0</td>
+<td align="left">-6.502,p=0</td>
+<td align="left">-4.894,p=0</td>
+</tr>
+<tr class="even">
+<td align="left">Random.Forest</td>
+<td align="left">41.441,p=0</td>
+<td align="left">0,p=1</td>
+<td align="left">34.846,p=0</td>
+<td align="left">51.586,p=0</td>
+<td align="left">17.502,p=0</td>
+<td align="left">17.399,p=0</td>
+</tr>
+<tr class="odd">
+<td align="left">SVM</td>
+<td align="left">-7.127,p=0</td>
+<td align="left">-34.846,p=0</td>
+<td align="left">0,p=1</td>
+<td align="left">10.583,p=0</td>
+<td align="left">-10.411,p=0</td>
+<td align="left">-8.883,p=0</td>
+</tr>
+<tr class="even">
+<td align="left">Naive.Bayes</td>
+<td align="left">-22.094,p=0</td>
+<td align="left">-51.586,p=0</td>
+<td align="left">-10.583,p=0</td>
+<td align="left">0,p=1</td>
+<td align="left">-20.152,p=0</td>
+<td align="left">-17.946,p=0</td>
+</tr>
+<tr class="odd">
+<td align="left">Bagging</td>
+<td align="left">6.502,p=0</td>
+<td align="left">-17.502,p=0</td>
+<td align="left">10.411,p=0</td>
+<td align="left">20.152,p=0</td>
+<td align="left">0,p=1</td>
+<td align="left">0.885,p=0.388</td>
+</tr>
+<tr class="even">
+<td align="left">Boosting</td>
+<td align="left">4.894,p=0</td>
+<td align="left">-17.399,p=0</td>
+<td align="left">8.883,p=0</td>
+<td align="left">17.946,p=0</td>
+<td align="left">-0.885,p=0.388</td>
+<td align="left">0,p=1</td>
+</tr>
+</tbody>
+</table>
+<table>
+<caption>Hepatitis Dataset F1 Score</caption>
+<thead>
+<tr class="header">
+<th align="left"></th>
+<th align="left">C4.5</th>
+<th align="left">Random.Forest</th>
+<th align="left">SVM</th>
+<th align="left">Naive.Bayes</th>
+<th align="left">Bagging</th>
+<th align="left">Boosting</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">C4.5</td>
+<td align="left">0,p=1</td>
+<td align="left">-28.788,p=0</td>
+<td align="left">1.221,p=0.24</td>
+<td align="left">10.175,p=0</td>
+<td align="left">-4.759,p=0</td>
+<td align="left">-5.467,p=0</td>
+</tr>
+<tr class="even">
+<td align="left">Random.Forest</td>
+<td align="left">28.788,p=0</td>
+<td align="left">0,p=1</td>
+<td align="left">26.276,p=0</td>
+<td align="left">35.471,p=0</td>
+<td align="left">17.049,p=0</td>
+<td align="left">16.579,p=0</td>
+</tr>
+<tr class="odd">
+<td align="left">SVM</td>
+<td align="left">-1.221,p=0.24</td>
+<td align="left">-26.276,p=0</td>
+<td align="left">0,p=1</td>
+<td align="left">6.719,p=0</td>
+<td align="left">-5.133,p=0</td>
+<td align="left">-5.772,p=0</td>
+</tr>
+<tr class="even">
+<td align="left">Naive.Bayes</td>
+<td align="left">-10.175,p=0</td>
+<td align="left">-35.471,p=0</td>
+<td align="left">-6.719,p=0</td>
+<td align="left">0,p=1</td>
+<td align="left">-10.673,p=0</td>
+<td align="left">-11.423,p=0</td>
+</tr>
+<tr class="odd">
+<td align="left">Bagging</td>
+<td align="left">4.759,p=0</td>
+<td align="left">-17.049,p=0</td>
+<td align="left">5.133,p=0</td>
+<td align="left">10.673,p=0</td>
+<td align="left">0,p=1</td>
+<td align="left">-0.518,p=0.611</td>
+</tr>
+<tr class="even">
+<td align="left">Boosting</td>
+<td align="left">5.467,p=0</td>
+<td align="left">-16.579,p=0</td>
+<td align="left">5.772,p=0</td>
+<td align="left">11.423,p=0</td>
+<td align="left">0.518,p=0.611</td>
+<td align="left">0,p=1</td>
+</tr>
+</tbody>
+</table>
+<pre class="r"><code>pairwiseTesting(calculations$Spect) %&gt;% kableMetrics(&quot;Spect Dataset&quot;)</code></pre>
+<table>
+<caption>Spect Dataset Accuracy</caption>
+<thead>
+<tr class="header">
+<th align="left"></th>
+<th align="left">C4.5</th>
+<th align="left">Random.Forest</th>
+<th align="left">SVM</th>
+<th align="left">Naive.Bayes</th>
+<th align="left">Bagging</th>
+<th align="left">Boosting</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">C4.5</td>
+<td align="left">0,p=1</td>
+<td align="left">1.551,p=0.139</td>
+<td align="left">2.498,p=0.023</td>
+<td align="left">-9.742,p=0</td>
+<td align="left">2.211,p=0.041</td>
+<td align="left">-3.841,p=0.001</td>
+</tr>
+<tr class="even">
+<td align="left">Random.Forest</td>
+<td align="left">-1.551,p=0.139</td>
+<td align="left">0,p=1</td>
+<td align="left">1.119,p=0.278</td>
+<td align="left">-13.994,p=0</td>
+<td align="left">0.818,p=0.424</td>
+<td align="left">-6.049,p=0</td>
+</tr>
+<tr class="odd">
+<td align="left">SVM</td>
+<td align="left">-2.498,p=0.023</td>
+<td align="left">-1.119,p=0.278</td>
+<td align="left">0,p=1</td>
+<td align="left">-14.842,p=0</td>
+<td align="left">-0.267,p=0.793</td>
+<td align="left">-6.973,p=0</td>
+</tr>
+<tr class="even">
+<td align="left">Naive.Bayes</td>
+<td align="left">9.742,p=0</td>
+<td align="left">13.994,p=0</td>
+<td align="left">14.842,p=0</td>
+<td align="left">0,p=1</td>
+<td align="left">14.006,p=0</td>
+<td align="left">5.73,p=0</td>
+</tr>
+<tr class="odd">
+<td align="left">Bagging</td>
+<td align="left">-2.211,p=0.041</td>
+<td align="left">-0.818,p=0.424</td>
+<td align="left">0.267,p=0.793</td>
+<td align="left">-14.006,p=0</td>
+<td align="left">0,p=1</td>
+<td align="left">-6.56,p=0</td>
+</tr>
+<tr class="even">
+<td align="left">Boosting</td>
+<td align="left">3.841,p=0.001</td>
+<td align="left">6.049,p=0</td>
+<td align="left">6.973,p=0</td>
+<td align="left">-5.73,p=0</td>
+<td align="left">6.56,p=0</td>
+<td align="left">0,p=1</td>
+</tr>
+</tbody>
+</table>
+<table>
+<caption>Spect Dataset Precision</caption>
+<thead>
+<tr class="header">
+<th align="left"></th>
+<th align="left">C4.5</th>
+<th align="left">Random.Forest</th>
+<th align="left">SVM</th>
+<th align="left">Naive.Bayes</th>
+<th align="left">Bagging</th>
+<th align="left">Boosting</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">C4.5</td>
+<td align="left">0,p=1</td>
+<td align="left">1.422,p=0.174</td>
+<td align="left">1.842,p=0.083</td>
+<td align="left">-6.452,p=0</td>
+<td align="left">2.548,p=0.02</td>
+<td align="left">-3.321,p=0.004</td>
+</tr>
+<tr class="even">
+<td align="left">Random.Forest</td>
+<td align="left">-1.422,p=0.174</td>
+<td align="left">0,p=1</td>
+<td align="left">0.522,p=0.608</td>
+<td align="left">-11.16,p=0</td>
+<td align="left">1.526,p=0.147</td>
+<td align="left">-5.316,p=0</td>
+</tr>
+<tr class="odd">
+<td align="left">SVM</td>
+<td align="left">-1.842,p=0.083</td>
+<td align="left">-0.522,p=0.608</td>
+<td align="left">0,p=1</td>
+<td align="left">-11.582,p=0</td>
+<td align="left">1.093,p=0.29</td>
+<td align="left">-5.711,p=0</td>
+</tr>
+<tr class="even">
+<td align="left">Naive.Bayes</td>
+<td align="left">6.452,p=0</td>
+<td align="left">11.16,p=0</td>
+<td align="left">11.582,p=0</td>
+<td align="left">0,p=1</td>
+<td align="left">9.598,p=0</td>
+<td align="left">2.065,p=0.067</td>
+</tr>
+<tr class="odd">
+<td align="left">Bagging</td>
+<td align="left">-2.548,p=0.02</td>
+<td align="left">-1.526,p=0.147</td>
+<td align="left">-1.093,p=0.29</td>
+<td align="left">-9.598,p=0</td>
+<td align="left">0,p=1</td>
+<td align="left">-5.842,p=0</td>
+</tr>
+<tr class="even">
+<td align="left">Boosting</td>
+<td align="left">3.321,p=0.004</td>
+<td align="left">5.316,p=0</td>
+<td align="left">5.711,p=0</td>
+<td align="left">-2.065,p=0.067</td>
+<td align="left">5.842,p=0</td>
+<td align="left">0,p=1</td>
+</tr>
+</tbody>
+</table>
+<table>
+<caption>Spect Dataset Recall</caption>
+<thead>
+<tr class="header">
+<th align="left"></th>
+<th align="left">C4.5</th>
+<th align="left">Random.Forest</th>
+<th align="left">SVM</th>
+<th align="left">Naive.Bayes</th>
+<th align="left">Bagging</th>
+<th align="left">Boosting</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">C4.5</td>
+<td align="left">0,p=1</td>
+<td align="left">0.151,p=0.882</td>
+<td align="left">4.382,p=0.001</td>
+<td align="left">38.539,p=0</td>
+<td align="left">-3.973,p=0.001</td>
+<td align="left">-4.894,p=0.001</td>
+</tr>
+<tr class="even">
+<td align="left">Random.Forest</td>
+<td align="left">-0.151,p=0.882</td>
+<td align="left">0,p=1</td>
+<td align="left">3.553,p=0.002</td>
+<td align="left">24.389,p=0</td>
+<td align="left">-3.146,p=0.006</td>
+<td align="left">-4.786,p=0.001</td>
+</tr>
+<tr class="odd">
+<td align="left">SVM</td>
+<td align="left">-4.382,p=0.001</td>
+<td align="left">-3.553,p=0.002</td>
+<td align="left">0,p=1</td>
+<td align="left">17.401,p=0</td>
+<td align="left">-6.821,p=0</td>
+<td align="left">-6.353,p=0</td>
+</tr>
+<tr class="even">
+<td align="left">Naive.Bayes</td>
+<td align="left">-38.539,p=0</td>
+<td align="left">-24.389,p=0</td>
+<td align="left">-17.401,p=0</td>
+<td align="left">0,p=1</td>
+<td align="left">-34.878,p=0</td>
+<td align="left">-13.368,p=0</td>
+</tr>
+<tr class="odd">
+<td align="left">Bagging</td>
+<td align="left">3.973,p=0.001</td>
+<td align="left">3.146,p=0.006</td>
+<td align="left">6.821,p=0</td>
+<td align="left">34.878,p=0</td>
+<td align="left">0,p=1</td>
+<td align="left">-3.633,p=0.005</td>
+</tr>
+<tr class="even">
+<td align="left">Boosting</td>
+<td align="left">4.894,p=0.001</td>
+<td align="left">4.786,p=0.001</td>
+<td align="left">6.353,p=0</td>
+<td align="left">13.368,p=0</td>
+<td align="left">3.633,p=0.005</td>
+<td align="left">0,p=1</td>
+</tr>
+</tbody>
+</table>
+<table>
+<caption>Spect Dataset F1 Score</caption>
+<thead>
+<tr class="header">
+<th align="left"></th>
+<th align="left">C4.5</th>
+<th align="left">Random.Forest</th>
+<th align="left">SVM</th>
+<th align="left">Naive.Bayes</th>
+<th align="left">Bagging</th>
+<th align="left">Boosting</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">C4.5</td>
+<td align="left">0,p=1</td>
+<td align="left">1.017,p=0.323</td>
+<td align="left">3.884,p=0.001</td>
+<td align="left">5.828,p=0</td>
+<td align="left">-0.245,p=0.809</td>
+<td align="left">-4.744,p=0.001</td>
+</tr>
+<tr class="even">
+<td align="left">Random.Forest</td>
+<td align="left">-1.017,p=0.323</td>
+<td align="left">0,p=1</td>
+<td align="left">2.638,p=0.017</td>
+<td align="left">3.778,p=0.003</td>
+<td align="left">-1.234,p=0.233</td>
+<td align="left">-5.107,p=0</td>
+</tr>
+<tr class="odd">
+<td align="left">SVM</td>
+<td align="left">-3.884,p=0.001</td>
+<td align="left">-2.638,p=0.017</td>
+<td align="left">0,p=1</td>
+<td align="left">0.293,p=0.775</td>
+<td align="left">-4.081,p=0.001</td>
+<td align="left">-6.317,p=0</td>
+</tr>
+<tr class="even">
+<td align="left">Naive.Bayes</td>
+<td align="left">-5.828,p=0</td>
+<td align="left">-3.778,p=0.003</td>
+<td align="left">-0.293,p=0.775</td>
+<td align="left">0,p=1</td>
+<td align="left">-6.055,p=0</td>
+<td align="left">-6.717,p=0</td>
+</tr>
+<tr class="odd">
+<td align="left">Bagging</td>
+<td align="left">0.245,p=0.809</td>
+<td align="left">1.234,p=0.233</td>
+<td align="left">4.081,p=0.001</td>
+<td align="left">6.055,p=0</td>
+<td align="left">0,p=1</td>
+<td align="left">-4.639,p=0.001</td>
+</tr>
+<tr class="even">
+<td align="left">Boosting</td>
+<td align="left">4.744,p=0.001</td>
+<td align="left">5.107,p=0</td>
+<td align="left">6.317,p=0</td>
+<td align="left">6.717,p=0</td>
+<td align="left">4.639,p=0.001</td>
+<td align="left">0,p=1</td>
+</tr>
+</tbody>
+</table>
+<pre class="r"><code>pairwiseTesting(calculations$Pima) %&gt;% kableMetrics(&quot;Pima Dataset&quot;)</code></pre>
+<table>
+<caption>Pima Dataset Accuracy</caption>
+<thead>
+<tr class="header">
+<th align="left"></th>
+<th align="left">C4.5</th>
+<th align="left">Random.Forest</th>
+<th align="left">SVM</th>
+<th align="left">Naive.Bayes</th>
+<th align="left">Bagging</th>
+<th align="left">Boosting</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">C4.5</td>
+<td align="left">0,p=1</td>
+<td align="left">5.239,p=0</td>
+<td align="left">6.256,p=0</td>
+<td align="left">2.722,p=0.019</td>
+<td align="left">-0.035,p=0.973</td>
+<td align="left">-0.829,p=0.418</td>
+</tr>
+<tr class="even">
+<td align="left">Random.Forest</td>
+<td align="left">-5.239,p=0</td>
+<td align="left">0,p=1</td>
+<td align="left">0.192,p=0.85</td>
+<td align="left">-4.225,p=0.001</td>
+<td align="left">-5.523,p=0</td>
+<td align="left">-6.097,p=0</td>
+</tr>
+<tr class="odd">
+<td align="left">SVM</td>
+<td align="left">-6.256,p=0</td>
+<td align="left">-0.192,p=0.85</td>
+<td align="left">0,p=1</td>
+<td align="left">-6.358,p=0</td>
+<td align="left">-6.707,p=0</td>
+<td align="left">-7.232,p=0</td>
+</tr>
+<tr class="even">
+<td align="left">Naive.Bayes</td>
+<td align="left">-2.722,p=0.019</td>
+<td align="left">4.225,p=0.001</td>
+<td align="left">6.358,p=0</td>
+<td align="left">0,p=1</td>
+<td align="left">-2.964,p=0.012</td>
+<td align="left">-3.778,p=0.003</td>
+</tr>
+<tr class="odd">
+<td align="left">Bagging</td>
+<td align="left">0.035,p=0.973</td>
+<td align="left">5.523,p=0</td>
+<td align="left">6.707,p=0</td>
+<td align="left">2.964,p=0.012</td>
+<td align="left">0,p=1</td>
+<td align="left">-0.826,p=0.419</td>
+</tr>
+<tr class="even">
+<td align="left">Boosting</td>
+<td align="left">0.829,p=0.418</td>
+<td align="left">6.097,p=0</td>
+<td align="left">7.232,p=0</td>
+<td align="left">3.778,p=0.003</td>
+<td align="left">0.826,p=0.419</td>
+<td align="left">0,p=1</td>
+</tr>
+</tbody>
+</table>
+<table>
+<caption>Pima Dataset Precision</caption>
+<thead>
+<tr class="header">
+<th align="left"></th>
+<th align="left">C4.5</th>
+<th align="left">Random.Forest</th>
+<th align="left">SVM</th>
+<th align="left">Naive.Bayes</th>
+<th align="left">Bagging</th>
+<th align="left">Boosting</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">C4.5</td>
+<td align="left">0,p=1</td>
+<td align="left">3.229,p=0.006</td>
+<td align="left">-4.05,p=0.002</td>
+<td align="left">0.814,p=0.434</td>
+<td align="left">-0.379,p=0.709</td>
+<td align="left">-3.538,p=0.003</td>
+</tr>
+<tr class="even">
+<td align="left">Random.Forest</td>
+<td align="left">-3.229,p=0.006</td>
+<td align="left">0,p=1</td>
+<td align="left">-12.309,p=0</td>
+<td align="left">-4.424,p=0.001</td>
+<td align="left">-4.481,p=0</td>
+<td align="left">-9.39,p=0</td>
+</tr>
+<tr class="odd">
+<td align="left">SVM</td>
+<td align="left">4.05,p=0.002</td>
+<td align="left">12.309,p=0</td>
+<td align="left">0,p=1</td>
+<td align="left">12.778,p=0</td>
+<td align="left">4.76,p=0.001</td>
+<td align="left">0.107,p=0.917</td>
+</tr>
+<tr class="even">
+<td align="left">Naive.Bayes</td>
+<td align="left">-0.814,p=0.434</td>
+<td align="left">4.424,p=0.001</td>
+<td align="left">-12.778,p=0</td>
+<td align="left">0,p=1</td>
+<td align="left">-1.668,p=0.122</td>
+<td align="left">-7.478,p=0</td>
+</tr>
+<tr class="odd">
+<td align="left">Bagging</td>
+<td align="left">0.379,p=0.709</td>
+<td align="left">4.481,p=0</td>
+<td align="left">-4.76,p=0.001</td>
+<td align="left">1.668,p=0.122</td>
+<td align="left">0,p=1</td>
+<td align="left">-3.855,p=0.001</td>
+</tr>
+<tr class="even">
+<td align="left">Boosting</td>
+<td align="left">3.538,p=0.003</td>
+<td align="left">9.39,p=0</td>
+<td align="left">-0.107,p=0.917</td>
+<td align="left">7.478,p=0</td>
+<td align="left">3.855,p=0.001</td>
+<td align="left">0,p=1</td>
+</tr>
+</tbody>
+</table>
+<table>
+<caption>Pima Dataset Recall</caption>
+<thead>
+<tr class="header">
+<th align="left"></th>
+<th align="left">C4.5</th>
+<th align="left">Random.Forest</th>
+<th align="left">SVM</th>
+<th align="left">Naive.Bayes</th>
+<th align="left">Bagging</th>
+<th align="left">Boosting</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">C4.5</td>
+<td align="left">0,p=1</td>
+<td align="left">4.039,p=0.001</td>
+<td align="left">16.599,p=0</td>
+<td align="left">3.107,p=0.009</td>
+<td align="left">0.432,p=0.671</td>
+<td align="left">3.073,p=0.007</td>
+</tr>
+<tr class="even">
+<td align="left">Random.Forest</td>
+<td align="left">-4.039,p=0.001</td>
+<td align="left">0,p=1</td>
+<td align="left">14.41,p=0</td>
+<td align="left">-2.063,p=0.06</td>
+<td align="left">-3.482,p=0.003</td>
+<td align="left">-0.324,p=0.75</td>
+</tr>
+<tr class="odd">
+<td align="left">SVM</td>
+<td align="left">-16.599,p=0</td>
+<td align="left">-14.41,p=0</td>
+<td align="left">0,p=1</td>
+<td align="left">-24.352,p=0</td>
+<td align="left">-15.64,p=0</td>
+<td align="left">-11.023,p=0</td>
+</tr>
+<tr class="even">
+<td align="left">Naive.Bayes</td>
+<td align="left">-3.107,p=0.009</td>
+<td align="left">2.063,p=0.06</td>
+<td align="left">24.352,p=0</td>
+<td align="left">0,p=1</td>
+<td align="left">-2.46,p=0.031</td>
+<td align="left">1.116,p=0.288</td>
+</tr>
+<tr class="odd">
+<td align="left">Bagging</td>
+<td align="left">-0.432,p=0.671</td>
+<td align="left">3.482,p=0.003</td>
+<td align="left">15.64,p=0</td>
+<td align="left">2.46,p=0.031</td>
+<td align="left">0,p=1</td>
+<td align="left">2.63,p=0.017</td>
+</tr>
+<tr class="even">
+<td align="left">Boosting</td>
+<td align="left">-3.073,p=0.007</td>
+<td align="left">0.324,p=0.75</td>
+<td align="left">11.023,p=0</td>
+<td align="left">-1.116,p=0.288</td>
+<td align="left">-2.63,p=0.017</td>
+<td align="left">0,p=1</td>
+</tr>
+</tbody>
+</table>
+<table>
+<caption>Pima Dataset F1 Score</caption>
+<thead>
+<tr class="header">
+<th align="left"></th>
+<th align="left">C4.5</th>
+<th align="left">Random.Forest</th>
+<th align="left">SVM</th>
+<th align="left">Naive.Bayes</th>
+<th align="left">Bagging</th>
+<th align="left">Boosting</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">C4.5</td>
+<td align="left">0,p=1</td>
+<td align="left">5.459,p=0</td>
+<td align="left">9.964,p=0</td>
+<td align="left">3.232,p=0.007</td>
+<td align="left">0.109,p=0.914</td>
+<td align="left">0.341,p=0.737</td>
+</tr>
+<tr class="even">
+<td align="left">Random.Forest</td>
+<td align="left">-5.459,p=0</td>
+<td align="left">0,p=1</td>
+<td align="left">3.772,p=0.002</td>
+<td align="left">-3.857,p=0.002</td>
+<td align="left">-5.323,p=0</td>
+<td align="left">-4.681,p=0</td>
+</tr>
+<tr class="odd">
+<td align="left">SVM</td>
+<td align="left">-9.964,p=0</td>
+<td align="left">-3.772,p=0.002</td>
+<td align="left">0,p=1</td>
+<td align="left">-11.39,p=0</td>
+<td align="left">-9.774,p=0</td>
+<td align="left">-8.519,p=0</td>
+</tr>
+<tr class="even">
+<td align="left">Naive.Bayes</td>
+<td align="left">-3.232,p=0.007</td>
+<td align="left">3.857,p=0.002</td>
+<td align="left">11.39,p=0</td>
+<td align="left">0,p=1</td>
+<td align="left">-3.07,p=0.01</td>
+<td align="left">-2.445,p=0.032</td>
+</tr>
+<tr class="odd">
+<td align="left">Bagging</td>
+<td align="left">-0.109,p=0.914</td>
+<td align="left">5.323,p=0</td>
+<td align="left">9.774,p=0</td>
+<td align="left">3.07,p=0.01</td>
+<td align="left">0,p=1</td>
+<td align="left">0.238,p=0.814</td>
+</tr>
+<tr class="even">
+<td align="left">Boosting</td>
+<td align="left">-0.341,p=0.737</td>
+<td align="left">4.681,p=0</td>
+<td align="left">8.519,p=0</td>
+<td align="left">2.445,p=0.032</td>
+<td align="left">-0.238,p=0.814</td>
+<td align="left">0,p=1</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="interpretation" class="section level2">
+<h2>Interpretation</h2>
 </div>
 </div>
 

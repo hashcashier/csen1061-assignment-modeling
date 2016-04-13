@@ -156,8 +156,8 @@ testClassifiers <- function(dataset) {
   }
   names(res) <- c(
     "C4.5",
-    "RandomForest",
-    "Support Vector Machine",
+    "Random Forest",
+    "SVM",
     "Naive Bayes",
     #"Neural Network", # THIS IS VERY SLOW. UNCOMMENT AT YOUR OWN RISK!
     "Bagging",
@@ -165,6 +165,33 @@ testClassifiers <- function(dataset) {
   
   res <- lapply(res, rbind_all)
   return(res)
+}
+
+pairwiseTesting <- function(calcs) {
+  cols <-c("Accuracy", "Precision", "Recall", "F1")
+  inv <- lapply(cols, function(x) {
+    sapply(calcs, "[[", i = x) %>% data.frame()
+  })
+  names(inv) <- cols
+
+  lapply(inv, function(metricDF) {
+    sapply(metricDF, function(var1) {
+      sapply(metricDF, function(var2) {
+        tmp <- t.test(var1, var2)
+        paste(
+          sprintf("%.3f", tmp$statistic[[1]]),
+          sprintf("%.3f", tmp$p.value),
+          sep = ",p=")
+      })
+    }) %>% data.frame()
+  })
+}
+
+kableMetrics <- function(results, caption) {
+  results$Accuracy %>% kable(caption = paste(caption, "Accuracy")) %>% print()
+  results$Precision %>% kable(caption = paste(caption, "Precision")) %>% print()
+  results$Recall %>% kable(caption = paste(caption, "Recall")) %>% print()
+  results$F1 %>% kable(caption = paste(caption, "F1 Score")) %>% print()
 }
 ```
 
@@ -189,4 +216,13 @@ sapply(metrics, "[", i = "F1", j = 1:6) %>% data.frame() %>% t() %>% kable(capti
 ```
 
 ## Comparisons
+
+```{r, results='asis'}
+pairwiseTesting(calculations$Sonar) %>% kableMetrics("Sonar Dataset")
+pairwiseTesting(calculations$Hepatitis) %>% kableMetrics("Hepatitis Dataset")
+pairwiseTesting(calculations$Spect) %>% kableMetrics("Spect Dataset")
+pairwiseTesting(calculations$Pima) %>% kableMetrics("Pima Dataset")
+```
+
+## Interpretation
 
