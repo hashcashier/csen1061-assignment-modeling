@@ -9,6 +9,7 @@ output: html_document
 library(RWeka)
 library(partykit)
 library(dplyr)
+library(knitr)
 ```
 
 # 1. Initialization
@@ -112,12 +113,16 @@ AdaBoostM1(V1 ~ ., data = sonar) %>%
 ## Datasets
 
 ```{r}
-hepatitis <- read.csv("hepatitis/hepatitis.data", header = FALSE)
-hepatitis$V1 <- as.factor(hepatitis$V1)
-spect <- rbind(read.csv("spect/SPECT.train", header = FALSE), read.csv("spect/SPECT.test", header = FALSE))
-spect$V1 <- as.factor(spect$V1)
-pima <- read.csv("pima/pima-indians-diabetes.data", header = FALSE) %>% rename(V1 = V9, V9 = V1)
-pima$V1 <- as.factor(pima$V1)
+hepatitis <- read.csv("hepatitis/hepatitis.data", header = FALSE) %>% mutate(V1 = as.factor(V1))
+spect <- 
+  rbind(read.csv("spect/SPECT.train", header = FALSE), read.csv("spect/SPECT.test", header = FALSE)) %>%
+  mutate(V1 = as.factor(V1))
+pima <- read.csv("pima/pima-indians-diabetes.data", header = FALSE) %>%
+  rename(V1 = V9, V9 = V1) %>%
+  mutate(V1 = as.factor(V1))
+
+datasets <- list(sonar, hepatitis, spect, pima)
+names(datasets) <- c("Sonar", "Hepatitis", "Spect", "Pima")
 ```
 
 ## Methods
@@ -165,6 +170,23 @@ testClassifiers <- function(dataset) {
 
 ## Calcluations
 
+```{r}
+calculations <- lapply(datasets, testClassifiers)
+```
+
+```{r}
+deepApply <- function(x, func = mean) {
+  sapply(x, function(y) {
+    sapply(y, func)
+  })
+}
+metrics <- lapply(calculations, deepApply)
+
+sapply(metrics, "[", i = "Accuracy", j = 1:6) %>% data.frame() %>% t() %>% kable(caption = "Accuracy")
+sapply(metrics, "[", i = "Precision", j = 1:6) %>% data.frame() %>% t() %>% kable(caption = "Precision")
+sapply(metrics, "[", i = "Recall", j = 1:6) %>% data.frame() %>% t() %>% kable(caption = "Recall")
+sapply(metrics, "[", i = "F1", j = 1:6) %>% data.frame() %>% t() %>% kable(caption = "F1 Score")
+```
 
 ## Comparisons
 

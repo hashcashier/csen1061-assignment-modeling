@@ -128,9 +128,10 @@ library(partykit)</code></pre>
 <pre><code>## The following objects are masked from 'package:base':
 ## 
 ##     intersect, setdiff, setequal, union</code></pre>
+<pre class="r"><code>library(knitr)</code></pre>
 <div id="initialization" class="section level1">
 <h1>1. Initialization</h1>
-<pre class="r"><code>sonar &lt;- read.csv(&quot;sonar/sonar.all-data&quot;, header = FALSE) #V61</code></pre>
+<pre class="r"><code>sonar &lt;- read.csv(&quot;sonar/sonar.all-data&quot;, header = FALSE) %&gt;% rename(V1 = V61, V61 = V1)</code></pre>
 <pre class="r"><code>compareWith10Fold &lt;- function(classifier) {
   print(summary(classifier))
   kfold &lt;- evaluate_Weka_classifier(classifier, numFolds = 10)
@@ -155,7 +156,7 @@ calculateMetrics &lt;- function(kfold) {
 </div>
 <div id="c4.5-classifier" class="section level1">
 <h1>2. C4.5 Classifier</h1>
-<pre class="r"><code>J48(V61 ~ ., sonar) %&gt;%
+<pre class="r"><code>J48(V1 ~ ., sonar) %&gt;%
   compareWith10Fold() %&gt;%
   calculateMetrics()</code></pre>
 <pre><code>## 
@@ -181,33 +182,33 @@ calculateMetrics &lt;- function(kfold) {
 ## 
 ## === Summary ===
 ## 
-## Correctly Classified Instances         150               72.1154 %
-## Incorrectly Classified Instances        58               27.8846 %
-## Kappa statistic                          0.4427
-## Mean absolute error                      0.2852
-## Root mean squared error                  0.5124
-## Relative absolute error                 57.2875 %
-## Root relative squared error            102.6984 %
-## Coverage of cases (0.95 level)          78.3654 %
-## Mean rel. region size (0.95 level)      57.9327 %
+## Correctly Classified Instances         147               70.6731 %
+## Incorrectly Classified Instances        61               29.3269 %
+## Kappa statistic                          0.4104
+## Mean absolute error                      0.2971
+## Root mean squared error                  0.5292
+## Relative absolute error                 59.6769 %
+## Root relative squared error            106.0618 %
+## Coverage of cases (0.95 level)          75.9615 %
+## Mean rel. region size (0.95 level)      56.7308 %
 ## Total Number of Instances              208     
 ## 
 ## === Confusion Matrix ===
 ## 
 ##   a  b   &lt;-- classified as
-##  78 33 |  a = M
-##  25 72 |  b = R</code></pre>
+##  81 30 |  a = M
+##  31 66 |  b = R</code></pre>
 <pre><code>## $Accuracy
-## [1] 0.7211538
+## [1] 0.7067308
 ## 
 ## $Precision
-## [1] 0.7572816
+## [1] 0.7232143
 ## 
 ## $Recall
-## [1] 0.7027027
+## [1] 0.7297297
 ## 
 ## $F1
-## [1] 0.728972</code></pre>
+## [1] 0.7264574</code></pre>
 <p>Accuracy, Mean Error, precision, recall, f-score</p>
 </div>
 <div id="other-classifiers" class="section level1">
@@ -215,7 +216,7 @@ calculateMetrics &lt;- function(kfold) {
 <div id="random-forest" class="section level2">
 <h2>Random Forest</h2>
 <pre class="r"><code>RF &lt;- make_Weka_classifier(&quot;weka/classifiers/trees/RandomForest&quot;)
-RF(V61 ~ ., data = sonar) %&gt;%
+RF(V1 ~ ., data = sonar) %&gt;%
   compareWith10Fold() %&gt;%
   calculateMetrics()</code></pre>
 <pre><code>## 
@@ -241,37 +242,37 @@ RF(V61 ~ ., data = sonar) %&gt;%
 ## 
 ## === Summary ===
 ## 
-## Correctly Classified Instances         173               83.1731 %
-## Incorrectly Classified Instances        35               16.8269 %
-## Kappa statistic                          0.6582
-## Mean absolute error                      0.3047
-## Root mean squared error                  0.3533
-## Relative absolute error                 61.2097 %
-## Root relative squared error             70.8144 %
+## Correctly Classified Instances         177               85.0962 %
+## Incorrectly Classified Instances        31               14.9038 %
+## Kappa statistic                          0.6968
+## Mean absolute error                      0.3019
+## Root mean squared error                  0.3476
+## Relative absolute error                 60.6496 %
+## Root relative squared error             69.665  %
 ## Coverage of cases (0.95 level)         100      %
-## Mean rel. region size (0.95 level)      97.3558 %
+## Mean rel. region size (0.95 level)      97.1154 %
 ## Total Number of Instances              208     
 ## 
 ## === Confusion Matrix ===
 ## 
 ##    a   b   &lt;-- classified as
-##  102   9 |   a = M
-##   26  71 |   b = R</code></pre>
+##  105   6 |   a = M
+##   25  72 |   b = R</code></pre>
 <pre><code>## $Accuracy
-## [1] 0.8317308
+## [1] 0.8509615
 ## 
 ## $Precision
-## [1] 0.796875
+## [1] 0.8076923
 ## 
 ## $Recall
-## [1] 0.9189189
+## [1] 0.9459459
 ## 
 ## $F1
-## [1] 0.8535565</code></pre>
+## [1] 0.8713693</code></pre>
 </div>
 <div id="support-vector-machine" class="section level2">
 <h2>Support Vector Machine</h2>
-<pre class="r"><code>SMO(V61 ~ ., data = sonar) %&gt;%
+<pre class="r"><code>SMO(V1 ~ ., data = sonar) %&gt;%
   compareWith10Fold() %&gt;%
   calculateMetrics()</code></pre>
 <pre><code>## 
@@ -297,38 +298,38 @@ RF(V61 ~ ., data = sonar) %&gt;%
 ## 
 ## === Summary ===
 ## 
-## Correctly Classified Instances         156               75      %
-## Incorrectly Classified Instances        52               25      %
-## Kappa statistic                          0.4977
-## Mean absolute error                      0.25  
-## Root mean squared error                  0.5   
-## Relative absolute error                 50.2194 %
-## Root relative squared error            100.2149 %
-## Coverage of cases (0.95 level)          75      %
+## Correctly Classified Instances         162               77.8846 %
+## Incorrectly Classified Instances        46               22.1154 %
+## Kappa statistic                          0.5539
+## Mean absolute error                      0.2212
+## Root mean squared error                  0.4703
+## Relative absolute error                 44.4249 %
+## Root relative squared error             94.2562 %
+## Coverage of cases (0.95 level)          77.8846 %
 ## Mean rel. region size (0.95 level)      50      %
 ## Total Number of Instances              208     
 ## 
 ## === Confusion Matrix ===
 ## 
 ##   a  b   &lt;-- classified as
-##  85 26 |  a = M
+##  91 20 |  a = M
 ##  26 71 |  b = R</code></pre>
 <pre><code>## $Accuracy
-## [1] 0.75
+## [1] 0.7788462
 ## 
 ## $Precision
-## [1] 0.7657658
+## [1] 0.7777778
 ## 
 ## $Recall
-## [1] 0.7657658
+## [1] 0.8198198
 ## 
 ## $F1
-## [1] 0.7657658</code></pre>
+## [1] 0.7982456</code></pre>
 </div>
 <div id="naive-bayes-classifier" class="section level2">
 <h2>Naive Bayes Classifier</h2>
 <pre class="r"><code>NB &lt;- make_Weka_classifier(&quot;weka/classifiers/bayes/NaiveBayes&quot;)
-NB(V61 ~ ., data = sonar) %&gt;%
+NB(V1 ~ ., data = sonar) %&gt;%
   compareWith10Fold() %&gt;%
   calculateMetrics()</code></pre>
 <pre><code>## 
@@ -354,38 +355,38 @@ NB(V61 ~ ., data = sonar) %&gt;%
 ## 
 ## === Summary ===
 ## 
-## Correctly Classified Instances         144               69.2308 %
-## Incorrectly Classified Instances        64               30.7692 %
-## Kappa statistic                          0.3936
-## Mean absolute error                      0.3135
-## Root mean squared error                  0.5298
-## Relative absolute error                 62.9784 %
-## Root relative squared error            106.1975 %
-## Coverage of cases (0.95 level)          78.3654 %
-## Mean rel. region size (0.95 level)      60.0962 %
+## Correctly Classified Instances         145               69.7115 %
+## Incorrectly Classified Instances        63               30.2885 %
+## Kappa statistic                          0.402 
+## Mean absolute error                      0.312 
+## Root mean squared error                  0.5305
+## Relative absolute error                 62.6682 %
+## Root relative squared error            106.3255 %
+## Coverage of cases (0.95 level)          76.9231 %
+## Mean rel. region size (0.95 level)      58.6538 %
 ## Total Number of Instances              208     
 ## 
 ## === Confusion Matrix ===
 ## 
 ##   a  b   &lt;-- classified as
-##  64 47 |  a = M
-##  17 80 |  b = R</code></pre>
+##  66 45 |  a = M
+##  18 79 |  b = R</code></pre>
 <pre><code>## $Accuracy
-## [1] 0.6923077
+## [1] 0.6971154
 ## 
 ## $Precision
-## [1] 0.7901235
+## [1] 0.7857143
 ## 
 ## $Recall
-## [1] 0.5765766
+## [1] 0.5945946
 ## 
 ## $F1
-## [1] 0.6666667</code></pre>
+## [1] 0.6769231</code></pre>
 </div>
 <div id="neural-network" class="section level2">
 <h2>Neural Network</h2>
 <pre class="r"><code>MLP &lt;- make_Weka_classifier(&quot;weka/classifiers/functions/MultilayerPerceptron&quot;)
-MLP(V61 ~ ., data = sonar) %&gt;%
+MLP(V1 ~ ., data = sonar) %&gt;%
   compareWith10Fold() %&gt;%
   calculateMetrics()</code></pre>
 <pre><code>## 
@@ -411,40 +412,40 @@ MLP(V61 ~ ., data = sonar) %&gt;%
 ## 
 ## === Summary ===
 ## 
-## Correctly Classified Instances         166               79.8077 %
-## Incorrectly Classified Instances        42               20.1923 %
-## Kappa statistic                          0.5938
-## Mean absolute error                      0.1979
-## Root mean squared error                  0.4047
-## Relative absolute error                 39.756  %
-## Root relative squared error             81.108  %
-## Coverage of cases (0.95 level)          90.8654 %
-## Mean rel. region size (0.95 level)      60.0962 %
+## Correctly Classified Instances         172               82.6923 %
+## Incorrectly Classified Instances        36               17.3077 %
+## Kappa statistic                          0.6518
+## Mean absolute error                      0.1702
+## Root mean squared error                  0.3755
+## Relative absolute error                 34.1884 %
+## Root relative squared error             75.2593 %
+## Coverage of cases (0.95 level)          90.3846 %
+## Mean rel. region size (0.95 level)      57.6923 %
 ## Total Number of Instances              208     
 ## 
 ## === Confusion Matrix ===
 ## 
 ##   a  b   &lt;-- classified as
-##  91 20 |  a = M
-##  22 75 |  b = R</code></pre>
+##  94 17 |  a = M
+##  19 78 |  b = R</code></pre>
 <pre><code>## $Accuracy
-## [1] 0.7980769
+## [1] 0.8269231
 ## 
 ## $Precision
-## [1] 0.8053097
+## [1] 0.8318584
 ## 
 ## $Recall
-## [1] 0.8198198
+## [1] 0.8468468
 ## 
 ## $F1
-## [1] 0.8125</code></pre>
+## [1] 0.8392857</code></pre>
 </div>
 <div id="bagging" class="section level2">
 <h2>Bagging</h2>
 <pre class="r"><code>C45Bagging &lt;- function(form, data, options = list(model = TRUE)) {
   return(Bagging(formula(form), data, control = Weka_control(W = &quot;weka.classifiers.trees.J48&quot;), options = options))
 }
-C45Bagging(V61 ~ ., data = sonar) %&gt;%
+C45Bagging(V1 ~ ., data = sonar) %&gt;%
   compareWith10Fold() %&gt;%
   calculateMetrics()</code></pre>
 <pre><code>## 
@@ -470,37 +471,37 @@ C45Bagging(V61 ~ ., data = sonar) %&gt;%
 ## 
 ## === Summary ===
 ## 
-## Correctly Classified Instances         154               74.0385 %
-## Incorrectly Classified Instances        54               25.9615 %
-## Kappa statistic                          0.475 
-## Mean absolute error                      0.3212
-## Root mean squared error                  0.4072
-## Relative absolute error                 64.5214 %
-## Root relative squared error             81.6156 %
+## Correctly Classified Instances         158               75.9615 %
+## Incorrectly Classified Instances        50               24.0385 %
+## Kappa statistic                          0.5139
+## Mean absolute error                      0.3151
+## Root mean squared error                  0.4025
+## Relative absolute error                 63.2946 %
+## Root relative squared error             80.6714 %
 ## Coverage of cases (0.95 level)          99.0385 %
-## Mean rel. region size (0.95 level)      92.0673 %
+## Mean rel. region size (0.95 level)      90.3846 %
 ## Total Number of Instances              208     
 ## 
 ## === Confusion Matrix ===
 ## 
 ##   a  b   &lt;-- classified as
-##  89 22 |  a = M
-##  32 65 |  b = R</code></pre>
+##  91 20 |  a = M
+##  30 67 |  b = R</code></pre>
 <pre><code>## $Accuracy
-## [1] 0.7403846
+## [1] 0.7596154
 ## 
 ## $Precision
-## [1] 0.7355372
+## [1] 0.7520661
 ## 
 ## $Recall
-## [1] 0.8018018
+## [1] 0.8198198
 ## 
 ## $F1
-## [1] 0.7672414</code></pre>
+## [1] 0.7844828</code></pre>
 </div>
 <div id="boosting" class="section level2">
 <h2>Boosting</h2>
-<pre class="r"><code>AdaBoostM1(V61 ~ ., data = sonar) %&gt;%
+<pre class="r"><code>AdaBoostM1(V1 ~ ., data = sonar) %&gt;%
   compareWith10Fold() %&gt;%
   calculateMetrics()</code></pre>
 <pre><code>## 
@@ -526,43 +527,49 @@ C45Bagging(V61 ~ ., data = sonar) %&gt;%
 ## 
 ## === Summary ===
 ## 
-## Correctly Classified Instances         160               76.9231 %
-## Incorrectly Classified Instances        48               23.0769 %
-## Kappa statistic                          0.5376
-## Mean absolute error                      0.2802
-## Root mean squared error                  0.4181
-## Relative absolute error                 56.2861 %
-## Root relative squared error             83.796  %
+## Correctly Classified Instances         156               75      %
+## Incorrectly Classified Instances        52               25      %
+## Kappa statistic                          0.4977
+## Mean absolute error                      0.2763
+## Root mean squared error                  0.4087
+## Relative absolute error                 55.5066 %
+## Root relative squared error             81.9219 %
 ## Coverage of cases (0.95 level)          95.6731 %
-## Mean rel. region size (0.95 level)      81.7308 %
+## Mean rel. region size (0.95 level)      82.6923 %
 ## Total Number of Instances              208     
 ## 
 ## === Confusion Matrix ===
 ## 
 ##   a  b   &lt;-- classified as
 ##  85 26 |  a = M
-##  22 75 |  b = R</code></pre>
+##  26 71 |  b = R</code></pre>
 <pre><code>## $Accuracy
-## [1] 0.7692308
+## [1] 0.75
 ## 
 ## $Precision
-## [1] 0.7943925
+## [1] 0.7657658
 ## 
 ## $Recall
 ## [1] 0.7657658
 ## 
 ## $F1
-## [1] 0.7798165</code></pre>
+## [1] 0.7657658</code></pre>
 </div>
 </div>
 <div id="satistically-significant-results" class="section level1">
 <h1>4. Satistically Significant Results</h1>
 <div id="datasets" class="section level2">
 <h2>Datasets</h2>
-<pre class="r"><code>sonar &lt;- sonar %&gt;% rename(V1 = V61, V61 = V1)
-hepatitis &lt;- read.csv(&quot;hepatitis/hepatitis.data&quot;, header = FALSE)
-spect &lt;- rbind(read.csv(&quot;spect/SPECT.train&quot;, header = FALSE), read.csv(&quot;spect/SPECT.test&quot;, header = FALSE))
-pima &lt;- read.csv(&quot;pima/pima-indians-diabetes.data&quot;, header = FALSE) %&gt;% rename(V1 = V9, V9 = V1)</code></pre>
+<pre class="r"><code>hepatitis &lt;- read.csv(&quot;hepatitis/hepatitis.data&quot;, header = FALSE) %&gt;% mutate(V1 = as.factor(V1))
+spect &lt;- 
+  rbind(read.csv(&quot;spect/SPECT.train&quot;, header = FALSE), read.csv(&quot;spect/SPECT.test&quot;, header = FALSE)) %&gt;%
+  mutate(V1 = as.factor(V1))
+pima &lt;- read.csv(&quot;pima/pima-indians-diabetes.data&quot;, header = FALSE) %&gt;%
+  rename(V1 = V9, V9 = V1) %&gt;%
+  mutate(V1 = as.factor(V1))
+
+datasets &lt;- list(sonar, hepatitis, spect, pima)
+names(datasets) &lt;- c(&quot;Sonar&quot;, &quot;Hepatitis&quot;, &quot;Spect&quot;, &quot;Pima&quot;)</code></pre>
 </div>
 <div id="methods" class="section level2">
 <h2>Methods</h2>
@@ -585,9 +592,10 @@ pima &lt;- read.csv(&quot;pima/pima-indians-diabetes.data&quot;, header = FALSE)
       subres &lt;- c(
         subres, 
         list(
-          evaluate_Weka_classifier(
-            func(V1 ~ ., dataset, options = list(model = TRUE)),
-            numFolds = 10)))
+          calculateMetrics(
+            evaluate_Weka_classifier(
+              func(V1 ~ ., dataset, options = list(model = TRUE)),
+              numFolds = 10))))
     }
     res &lt;- c(res, list(subres))
   }
@@ -599,11 +607,233 @@ pima &lt;- read.csv(&quot;pima/pima-indians-diabetes.data&quot;, header = FALSE)
     #&quot;Neural Network&quot;, # THIS IS VERY SLOW. UNCOMMENT AT YOUR OWN RISK!
     &quot;Bagging&quot;,
     &quot;Boosting&quot;)
+  
+  res &lt;- lapply(res, rbind_all)
   return(res)
 }</code></pre>
 </div>
 <div id="calcluations" class="section level2">
 <h2>Calcluations</h2>
+<pre class="r"><code>calculations &lt;- lapply(datasets, testClassifiers)</code></pre>
+<pre class="r"><code>deepApply &lt;- function(x, func = mean) {
+  sapply(x, function(y) {
+    sapply(y, func)
+  })
+}
+metrics &lt;- lapply(calculations, deepApply)
+
+sapply(metrics, &quot;[&quot;, i = &quot;Accuracy&quot;, j = 1:6) %&gt;% data.frame() %&gt;% t() %&gt;% kable(caption = &quot;Accuracy&quot;)</code></pre>
+<table>
+<caption>Accuracy</caption>
+<thead>
+<tr class="header">
+<th align="left"></th>
+<th align="right">C4.5</th>
+<th align="right">RandomForest</th>
+<th align="right">Support Vector Machine</th>
+<th align="right">Naive Bayes</th>
+<th align="right">Bagging</th>
+<th align="right">Boosting</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Sonar</td>
+<td align="right">0.7293269</td>
+<td align="right">0.8423077</td>
+<td align="right">0.7649038</td>
+<td align="right">0.6817308</td>
+<td align="right">0.7778846</td>
+<td align="right">0.7543269</td>
+</tr>
+<tr class="even">
+<td align="left">Hepatitis</td>
+<td align="right">0.8322581</td>
+<td align="right">0.7980645</td>
+<td align="right">0.8038710</td>
+<td align="right">0.8232258</td>
+<td align="right">0.8193548</td>
+<td align="right">0.8064516</td>
+</tr>
+<tr class="odd">
+<td align="left">Spect</td>
+<td align="right">0.8067416</td>
+<td align="right">0.8198502</td>
+<td align="right">0.8329588</td>
+<td align="right">0.7662921</td>
+<td align="right">0.8277154</td>
+<td align="right">0.7812734</td>
+</tr>
+<tr class="even">
+<td align="left">Pima</td>
+<td align="right">0.7393229</td>
+<td align="right">0.7604167</td>
+<td align="right">0.7695312</td>
+<td align="right">0.7576823</td>
+<td align="right">0.7535156</td>
+<td align="right">0.7446615</td>
+</tr>
+</tbody>
+</table>
+<pre class="r"><code>sapply(metrics, &quot;[&quot;, i = &quot;Precision&quot;, j = 1:6) %&gt;% data.frame() %&gt;% t() %&gt;% kable(caption = &quot;Precision&quot;)</code></pre>
+<table>
+<caption>Precision</caption>
+<thead>
+<tr class="header">
+<th align="left"></th>
+<th align="right">C4.5</th>
+<th align="right">RandomForest</th>
+<th align="right">Support Vector Machine</th>
+<th align="right">Naive Bayes</th>
+<th align="right">Bagging</th>
+<th align="right">Boosting</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Sonar</td>
+<td align="right">0.7469085</td>
+<td align="right">0.8151072</td>
+<td align="right">0.7706873</td>
+<td align="right">0.7765718</td>
+<td align="right">0.7658840</td>
+<td align="right">0.7562385</td>
+</tr>
+<tr class="even">
+<td align="left">Hepatitis</td>
+<td align="right">0.6383521</td>
+<td align="right">0.5500000</td>
+<td align="right">0.5280762</td>
+<td align="right">0.5575942</td>
+<td align="right">0.6048564</td>
+<td align="right">0.5538287</td>
+</tr>
+<tr class="odd">
+<td align="left">Spect</td>
+<td align="right">0.5367017</td>
+<td align="right">0.5774833</td>
+<td align="right">0.6093587</td>
+<td align="right">0.4593940</td>
+<td align="right">0.6096828</td>
+<td align="right">0.4511124</td>
+</tr>
+<tr class="even">
+<td align="left">Pima</td>
+<td align="right">0.7861445</td>
+<td align="right">0.7992517</td>
+<td align="right">0.7820497</td>
+<td align="right">0.7982303</td>
+<td align="right">0.7965654</td>
+<td align="right">0.7831931</td>
+</tr>
+</tbody>
+</table>
+<pre class="r"><code>sapply(metrics, &quot;[&quot;, i = &quot;Recall&quot;, j = 1:6) %&gt;% data.frame() %&gt;% t() %&gt;% kable(caption = &quot;Recall&quot;)</code></pre>
+<table>
+<caption>Recall</caption>
+<thead>
+<tr class="header">
+<th align="left"></th>
+<th align="right">C4.5</th>
+<th align="right">RandomForest</th>
+<th align="right">Support Vector Machine</th>
+<th align="right">Naive Bayes</th>
+<th align="right">Bagging</th>
+<th align="right">Boosting</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Sonar</td>
+<td align="right">0.7459459</td>
+<td align="right">0.9117117</td>
+<td align="right">0.7963964</td>
+<td align="right">0.5666667</td>
+<td align="right">0.8423423</td>
+<td align="right">0.7972973</td>
+</tr>
+<tr class="even">
+<td align="left">Hepatitis</td>
+<td align="right">0.4406250</td>
+<td align="right">0.0625000</td>
+<td align="right">0.4843750</td>
+<td align="right">0.6968750</td>
+<td align="right">0.3562500</td>
+<td align="right">0.3625000</td>
+</tr>
+<tr class="odd">
+<td align="left">Spect</td>
+<td align="right">0.4727273</td>
+<td align="right">0.4727273</td>
+<td align="right">0.5327273</td>
+<td align="right">0.7581818</td>
+<td align="right">0.4581818</td>
+<td align="right">0.2836364</td>
+</tr>
+<tr class="even">
+<td align="left">Pima</td>
+<td align="right">0.8240000</td>
+<td align="right">0.8440000</td>
+<td align="right">0.8956000</td>
+<td align="right">0.8402000</td>
+<td align="right">0.8346000</td>
+<td align="right">0.8406000</td>
+</tr>
+</tbody>
+</table>
+<pre class="r"><code>sapply(metrics, &quot;[&quot;, i = &quot;F1&quot;, j = 1:6) %&gt;% data.frame() %&gt;% t() %&gt;% kable(caption = &quot;F1 Score&quot;)</code></pre>
+<table>
+<caption>F1 Score</caption>
+<thead>
+<tr class="header">
+<th align="left"></th>
+<th align="right">C4.5</th>
+<th align="right">RandomForest</th>
+<th align="right">Support Vector Machine</th>
+<th align="right">Naive Bayes</th>
+<th align="right">Bagging</th>
+<th align="right">Boosting</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Sonar</td>
+<td align="right">0.7462555</td>
+<td align="right">0.8605846</td>
+<td align="right">0.7832888</td>
+<td align="right">0.6551844</td>
+<td align="right">0.8019136</td>
+<td align="right">0.7760680</td>
+</tr>
+<tr class="even">
+<td align="left">Hepatitis</td>
+<td align="right">0.5206495</td>
+<td align="right">NaN</td>
+<td align="right">0.5049129</td>
+<td align="right">0.6192683</td>
+<td align="right">0.4468226</td>
+<td align="right">0.4359535</td>
+</tr>
+<tr class="odd">
+<td align="left">Spect</td>
+<td align="right">0.5023480</td>
+<td align="right">0.5194976</td>
+<td align="right">0.5674260</td>
+<td align="right">0.5720586</td>
+<td align="right">0.5228650</td>
+<td align="right">0.3405869</td>
+</tr>
+<tr class="even">
+<td align="left">Pima</td>
+<td align="right">0.8044036</td>
+<td align="right">0.8210019</td>
+<td align="right">0.8349784</td>
+<td align="right">0.8186719</td>
+<td align="right">0.8151045</td>
+<td align="right">0.8108406</td>
+</tr>
+</tbody>
+</table>
 </div>
 <div id="comparisons" class="section level2">
 <h2>Comparisons</h2>
