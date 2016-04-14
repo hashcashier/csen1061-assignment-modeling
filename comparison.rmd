@@ -14,9 +14,13 @@ library(knitr)
 
 # 1. Initialization
 
+We first read the initial dataset and swap two columns as to make the first variable the target of classification.
+
 ```{r}
 sonar <- read.csv("sonar/sonar.all-data", header = FALSE) %>% rename(V1 = V61, V61 = V1)
 ```
+
+Here we define our method that compares normal testing with 10-fold cross validation and our metrics calculation method.
 
 ```{r}
 compareWith10Fold <- function(classifier) {
@@ -44,15 +48,17 @@ calculateMetrics <- function(kfold) {
 
 # 2. C4.5 Classifier
 
+We first output the results of testing and cross-validation for the C4.5 classifier.
+
 ```{r}
 J48(V1 ~ ., sonar) %>%
   compareWith10Fold() %>%
   calculateMetrics()
 ```
 
-Accuracy, Mean Error, precision, recall, f-score
-
 # 3. Other Classifiers
+
+Here we repeat the same procedure for each of the following classifiers:
 
 ## Random Forest
 
@@ -112,6 +118,8 @@ AdaBoostM1(V1 ~ ., data = sonar) %>%
 
 ## Datasets
 
+We proceed to load the remaining datasets and standardize the target classification variable to be named *V1*.
+
 ```{r}
 hepatitis <- read.csv("hepatitis/hepatitis.data", header = FALSE) %>% mutate(V1 = as.factor(V1))
 spect <- 
@@ -126,6 +134,8 @@ names(datasets) <- c("Sonar", "Hepatitis", "Spect", "Pima")
 ```
 
 ## Methods
+
+In this section we define our methods for calculating the different metrics on a dataset for each algorithm we have used. We have ommitted the calculations for the multi-layer perceptron ANN since it is very slow. Uncommenting the below lines will produce the intended output, but will take a lot of time.
 
 ```{r}
 testClassifiers <- function(dataset) {
@@ -166,7 +176,11 @@ testClassifiers <- function(dataset) {
   res <- lapply(res, rbind_all)
   return(res)
 }
+```
 
+Defined below is the method for performing pair-wise t-tests for every two algorithms for a metric on a given set of calculations.
+
+```{r}
 pairwiseTesting <- function(calcs) {
   cols <-c("Accuracy", "Precision", "Recall", "F1")
   inv <- lapply(cols, function(x) {
@@ -182,6 +196,7 @@ pairwiseTesting <- function(calcs) {
           sprintf("%.3f", tmp$statistic[[1]]),
           sprintf("%.3f", tmp$p.value),
           sep = ",p=")
+        #list(t = tmp$statistic[[1]], tmp$p.value)
       })
     }) %>% data.frame()
   })
@@ -195,7 +210,31 @@ kableMetrics <- function(results, caption) {
 }
 ```
 
+Below is the method to calculate the number of *wins* every algorithm has in a table. We say that an algorithm has one when the difference in means between it and another algorithm is in its favor with a p-value of < 0.05.
+
+```{r}
+winCalculation <- function(lst) {
+  lapply(lst, function(dframe) {
+    row <- sapply(dframe, function(col) {
+      nums <- strsplit(as.character(col), ",p=")
+      win <- sapply(nums, function(res) {
+        tval <- as.numeric(res[[1]])
+        pval <- as.numeric(res[[2]])
+        subres <- (tval > 0) & (pval < 0.05)
+
+        return (subres)
+      })
+      sum(win)
+    }) %>% data.frame() %>% t() %>% data.frame()
+    row.names(row) <- "Wins"
+    row
+  })
+}
+```
+
 ## Calcluations
+
+Here we calculate our metrics 10 times for each dataset, algorithm pair and display the mean of the results.
 
 ```{r}
 calculations <- lapply(datasets, testClassifiers)
@@ -217,12 +256,72 @@ sapply(metrics, "[", i = "F1", j = 1:6) %>% data.frame() %>% t() %>% kable(capti
 
 ## Comparisons
 
+In this section we will perform pairwise t tests for each dataset.
+
+### Sonar
+
 ```{r, results='asis'}
-pairwiseTesting(calculations$Sonar) %>% kableMetrics("Sonar Dataset")
-pairwiseTesting(calculations$Hepatitis) %>% kableMetrics("Hepatitis Dataset")
-pairwiseTesting(calculations$Spect) %>% kableMetrics("Spect Dataset")
-pairwiseTesting(calculations$Pima) %>% kableMetrics("Pima Dataset")
+pwise.sonar <-pairwiseTesting(calculations$Sonar)
+kableMetrics(pwise.sonar, "Sonar Dataset")
+```
+
+### Hepatitis
+
+```{r, results='asis'}
+pwise.hepatitis <- pairwiseTesting(calculations$Hepatitis)
+kableMetrics(pwise.hepatitis, "Hepatitis Dataset")
+```
+
+### SPECT
+
+```{r, results='asis'}
+pwise.spect <- pairwiseTesting(calculations$Spect)
+kableMetrics(pwise.spect, "Spect Dataset")
+```
+
+### Pima Indians
+
+```{r, results='asis'}
+pwise.pima <- pairwiseTesting(calculations$Pima)
+kableMetrics(pwise.pima,"Pima Dataset")
 ```
 
 ## Interpretation
 
+Here we present the win-calculations for each dataset and algorithm. The questions of who has the most wins can be answered using the below tables for each dataset and measure of efficacy. A clear and only winner is only apparent for each dataset when it accrues substantially more wins than the other algorithms it competes with.
+
+### Sonar
+
+```{r, results='asis'}
+winCalculation(pwise.sonar) %>%
+  kableMetrics("Sonar Dataset")
+```
+
+The Random Forest classifier clearly dominates wins in the sonar dataset across all measures.
+
+### Hepatitis
+
+```{r, results='asis'}
+winCalculation(pwise.hepatitis) %>%
+  kableMetrics("Hepatitis Dataset")
+```
+
+The hepatitis dataset is a close competition between the C4.5 and Naive Bayes classifiers. The C4.5 classifier performs better than all others in terms of accuracy, while the Naive Bayes classifier outperforms the others in terms of recall and F1 score. Precision appears to be equally contested by C4.5 and Bagging.
+
+### SPECT
+
+```{r, results='asis'}
+winCalculation(pwise.spect) %>%
+  kableMetrics("SPECT Dataset")
+```
+
+The Naive Bayes classifier outperforms all others in terms of recall, and contests the SVM in terms of F1 score, while accuracy and precision are equally contested by the Random Forest, Support Vector Machine and Bagging classifiers.
+
+### Pima Indians
+
+```{r, results='asis'}
+winCalculation(pwise.pima) %>%
+  kableMetrics("PIMA Dataset")
+```
+
+Here the SVM classifier appears to dominate all but precision, which appears to be contested by the Random Forst and Naive Bayes classifiers.
