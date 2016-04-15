@@ -20,14 +20,17 @@ We first read the initial dataset and swap two columns as to make the first vari
 sonar <- read.csv("sonar/sonar.all-data", header = FALSE) %>% rename(V1 = V61, V61 = V1)
 ```
 
-Here we define our method that compares normal testing with 10-fold cross validation and our metrics calculation method.
+Here we define our method that compares whole-dataset testing with 10-fold cross validation and our metrics calculation method.
 
 ```{r}
 compareWith10Fold <- function(classifier) {
-  print(summary(classifier))
+  entireDataSet <- summary(classifier)
+  print(entireDataSet)
+  print(calculateMetrics(entireDataSet))
+  
   kfold <- evaluate_Weka_classifier(classifier, numFolds = 10)
   print(kfold)
-  return(kfold)
+  print(calculateMetrics(kfold))
 }
 
 calculateMetrics <- function(kfold) {
@@ -48,51 +51,41 @@ calculateMetrics <- function(kfold) {
 
 # 2. C4.5 Classifier
 
-We first output the results of testing and cross-validation for the C4.5 classifier.
+This section contains the results of training a C4.5 classifier using the entire dataset for both training and testing, and then results of training using 10-fold cross validation.
 
 ```{r}
-J48(V1 ~ ., sonar) %>%
-  compareWith10Fold() %>%
-  calculateMetrics()
+J48(V1 ~ ., sonar) %>% compareWith10Fold()
 ```
 
 # 3. Other Classifiers
 
-Here we repeat the same procedure for each of the following classifiers:
+Here we repeat the same procedure and output the same two results (with and without cross-validation) for each of the following classifiers:
 
 ## Random Forest
 
 ```{r}
 RF <- make_Weka_classifier("weka/classifiers/trees/RandomForest")
-RF(V1 ~ ., data = sonar) %>%
-  compareWith10Fold() %>%
-  calculateMetrics()
+RF(V1 ~ ., data = sonar) %>% compareWith10Fold()
 ```
 
 ## Support Vector Machine
 
 ```{r}
-SMO(V1 ~ ., data = sonar) %>%
-  compareWith10Fold() %>%
-  calculateMetrics()
+SMO(V1 ~ ., data = sonar) %>% compareWith10Fold()
 ```
 
 ## Naive Bayes Classifier
 
 ```{r}
 NB <- make_Weka_classifier("weka/classifiers/bayes/NaiveBayes")
-NB(V1 ~ ., data = sonar) %>%
-  compareWith10Fold() %>%
-  calculateMetrics()
+NB(V1 ~ ., data = sonar) %>% compareWith10Fold()
 ```
 
 ## Neural Network
 
 ```{r}
 MLP <- make_Weka_classifier("weka/classifiers/functions/MultilayerPerceptron")
-MLP(V1 ~ ., data = sonar) %>%
-  compareWith10Fold() %>%
-  calculateMetrics()
+MLP(V1 ~ ., data = sonar) %>% compareWith10Fold()
 ```
 
 ## Bagging
@@ -101,17 +94,13 @@ MLP(V1 ~ ., data = sonar) %>%
 C45Bagging <- function(form, data, options = list(model = TRUE)) {
   return(Bagging(formula(form), data, control = Weka_control(W = "weka.classifiers.trees.J48"), options = options))
 }
-C45Bagging(V1 ~ ., data = sonar) %>%
-  compareWith10Fold() %>%
-  calculateMetrics()
+C45Bagging(V1 ~ ., data = sonar) %>% compareWith10Fold()
 ```
 
 ## Boosting
 
 ```{r}
-AdaBoostM1(V1 ~ ., data = sonar) %>%
-  compareWith10Fold() %>%
-  calculateMetrics()
+AdaBoostM1(V1 ~ ., data = sonar) %>% compareWith10Fold()
 ```
 
 # 4. Satistically Significant Results
@@ -234,7 +223,7 @@ winCalculation <- function(lst) {
 
 ## Calcluations
 
-Here we calculate our metrics 10 times for each dataset, algorithm pair and display the mean of the results.
+Here we calculate our metrics 10 times for each (dataset, algorithm) pair and display the mean of the results.
 
 ```{r}
 calculations <- lapply(datasets, testClassifiers)
